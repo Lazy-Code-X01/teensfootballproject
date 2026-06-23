@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { teams, fixtures, results, standings } from "@/lib/mockData";
 import { useModal } from "@/context/ModalContext";
 

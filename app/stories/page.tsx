@@ -5,10 +5,6 @@ import Image from "next/image";
 import { stories } from "@/lib/mockStories";
 import { useModal } from "@/context/ModalContext";
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-}
-
 export default function StoriesPage() {
   const { openModal } = useModal();
   const featured = stories[0];

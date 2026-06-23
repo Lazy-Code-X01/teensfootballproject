@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { highlights, galleryItems, newsItems } from "@/lib/mockMedia";
 import { useModal } from "@/context/ModalContext";
 
