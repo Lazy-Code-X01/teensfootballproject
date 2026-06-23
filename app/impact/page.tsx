@@ -94,7 +94,7 @@ export default function ImpactPage() {
       <section
         className="relative flex min-h-[55vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/impact-bg.png')",
+          backgroundImage: "url('/impact-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -181,7 +181,7 @@ export default function ImpactPage() {
       <section
         className="relative h-[450px] w-full"
         style={{
-          backgroundImage: "url('/impact-community.png')",
+          backgroundImage: "url('/impact-community.webp')",
           backgroundSize: "cover",
           backgroundPosition: "top",
         }}
@@ -235,7 +235,7 @@ export default function ImpactPage() {
             </div>
 
             <div className="relative h-[450px] overflow-hidden rounded-2xl">
-              <Image src="/about-edu.png" alt="Football and education" fill className="object-cover" />
+              <Image src="/about-edu.webp" alt="Football and education" fill className="object-cover" />
             </div>
 
           </div>
@@ -246,7 +246,7 @@ export default function ImpactPage() {
       <section
         className="relative flex h-[500px] items-center justify-center"
         style={{
-          backgroundImage: "url('/impact-player.png')",
+          backgroundImage: "url('/impact-player.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -303,7 +303,7 @@ export default function ImpactPage() {
           <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
 
             <div className="relative h-[400px] overflow-hidden rounded-2xl">
-              <Image src="/impact-growth.png" alt="TFP growth" fill className="object-cover" />
+              <Image src="/impact-growth.webp" alt="TFP growth" fill className="object-cover" />
             </div>
 
             <div>

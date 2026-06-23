@@ -5,25 +5,25 @@ import Image from "next/image";
 
 const coaches = [
   {
-    image: "/coach-1.png",
+    image: "/coach-1.webp",
     name: "Coach Emeka Obi",
     role: "Head Coach",
     bio: "Former Super Eagles youth team coach with 15+ years developing grassroots talent across Nigeria.",
   },
   {
-    image: "/coach-2.png",
+    image: "/coach-2.webp",
     name: "Coach Tunde Adeyemi",
     role: "Assistant Coach",
     bio: "Former national league player with over 12 years of coaching experience developing youth and elite teams.",
   },
   {
-    image: "/coach-3.png",
+    image: "/coach-3.webp",
     name: "Coach Seun Bello",
     role: "Goalkeeping Coach",
     bio: "Specialist goalkeeper trainer with 8 years experience, trained 3 players now in professional clubs.",
   },
   {
-    image: "/coach-4.png",
+    image: "/coach-4.webp",
     name: "Coach Kola Martins",
     role: "Fitness Trainer",
     bio: "Certified fitness trainer focused on speed, agility and injury prevention for teenage athletes.",

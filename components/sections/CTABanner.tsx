@@ -87,7 +87,7 @@ export default function CTABanner() {
       <div
         className="relative min-h-[300px] md:min-h-0"
         style={{
-          backgroundImage: "url('/cta-bg.png')",
+          backgroundImage: "url('/cta-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

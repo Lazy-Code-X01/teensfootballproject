@@ -12,7 +12,7 @@ export default function Hero() {
     <section
       className="relative min-h-screen flex flex-col overflow-hidden"
       style={{
-        backgroundImage: "url('/home-test-bg.png')",
+        backgroundImage: "url('/home-test-bg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center right",
       }}

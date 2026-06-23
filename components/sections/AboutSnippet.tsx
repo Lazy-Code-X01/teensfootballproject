@@ -37,7 +37,7 @@ export default function AboutSnippet() {
           {/* Small portrait image */}
           <div className="w-full max-w-[280px] shrink-0">
             <Image
-              src="/about-1.png"
+              src="/about-1.webp"
               alt="TFP players training"
               width={280}
               height={340}
@@ -87,7 +87,7 @@ export default function AboutSnippet() {
           {/* [B] Center: large image: dominant, explicit height */}
           <div className="order-3 md:order-2 md:col-start-2">
             <Image
-              src="/about-2.png"
+              src="/about-2.webp"
               alt="TFP team together"
               width={500}
               height={600}
@@ -103,7 +103,7 @@ export default function AboutSnippet() {
             </p>
             <div className="mt-auto">
               <Image
-                src="/about-3.png"
+                src="/about-3.webp"
                 alt="TFP coaching session"
                 width={360}
                 height={160}

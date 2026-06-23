@@ -5,9 +5,9 @@ import Image from "next/image";
 import { useModal } from "@/context/ModalContext";
 
 const programs = [
-  { image: "/program-1.png", label: "Grassroots Program",       sublabel: "Ages 10 - 13" },
-  { image: "/program-2.png", label: "Rising Players Program",   sublabel: "Ages 14 - 16" },
-  { image: "/program-3.png", label: "Elite & Exposure Program", sublabel: "Ages 17 - 19" },
+  { image: "/program-1.webp", label: "Grassroots Program",       sublabel: "Ages 10 - 13" },
+  { image: "/program-2.webp", label: "Rising Players Program",   sublabel: "Ages 14 - 16" },
+  { image: "/program-3.webp", label: "Elite & Exposure Program", sublabel: "Ages 17 - 19" },
 ];
 
 export default function Programs() {

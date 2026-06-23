@@ -17,7 +17,7 @@ export default function StoriesPage() {
       <section
         className="relative flex min-h-[50vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/impact-player.png')",
+          backgroundImage: "url('/impact-player.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

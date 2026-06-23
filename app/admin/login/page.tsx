@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
       <div
         className="absolute inset-0 scale-105"
         style={{
-          backgroundImage: "url('/home-test-bg.png')",
+          backgroundImage: "url('/home-test-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(12px)",

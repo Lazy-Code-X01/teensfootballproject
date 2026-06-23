@@ -69,7 +69,7 @@ export default function AboutPage() {
       <section
         className="relative flex min-h-[50vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/about-1.png')",
+          backgroundImage: "url('/about-1.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -92,7 +92,7 @@ export default function AboutPage() {
 
             {/* Image */}
             <div className="relative h-[450px] w-full overflow-hidden rounded-2xl">
-              <Image src="/about-2.png" alt="TFP players training" fill className="object-cover" />
+              <Image src="/about-2.webp" alt="TFP players training" fill className="object-cover" />
             </div>
 
             {/* Text */}
@@ -231,7 +231,7 @@ export default function AboutPage() {
 
             {/* Image */}
             <div className="relative h-[450px] w-full overflow-hidden rounded-2xl">
-              <Image src="/about-edu.png" alt="Football and education" fill className="object-cover" />
+              <Image src="/about-edu.webp" alt="Football and education" fill className="object-cover" />
             </div>
 
           </div>
@@ -256,7 +256,7 @@ export default function AboutPage() {
       <section
         className="relative flex min-h-[400px] items-center justify-center"
         style={{
-          backgroundImage: "url('/about-match.png')",
+          backgroundImage: "url('/about-match.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",

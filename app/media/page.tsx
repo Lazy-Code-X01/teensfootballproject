@@ -17,7 +17,7 @@ export default function MediaPage() {
       <section
         className="relative flex min-h-[50vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/media-bg.png')",
+          backgroundImage: "url('/media-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "top",
         }}

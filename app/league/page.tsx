@@ -41,7 +41,7 @@ export default function LeaguePage() {
       <section
         className="relative flex min-h-[50vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/league-bg.png')",
+          backgroundImage: "url('/league-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

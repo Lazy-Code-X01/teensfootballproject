@@ -46,7 +46,7 @@ export default function AcademyFeatures() {
             improve performance and help every player reach their potential.
           </p>
           <Image
-            src="/academy.png"
+            src="/academy.webp"
             alt="TFP Academy facilities"
             width={600}
             height={300}

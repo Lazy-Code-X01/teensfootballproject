@@ -92,7 +92,7 @@ export default function ContactPage() {
       <section
         className="relative flex min-h-[40vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/contact-bg.png')",
+          backgroundImage: "url('/contact-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

@@ -83,7 +83,7 @@ export default function SponsorsPage() {
       <section
         className="relative flex min-h-[55vh] items-center justify-center pt-20"
         style={{
-          backgroundImage: "url('/sponsors-bg.png')",
+          backgroundImage: "url('/sponsors-bg.webp')",
           backgroundSize: "cover",
           backgroundPosition: "top",
         }}
@@ -116,7 +116,7 @@ export default function SponsorsPage() {
           <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
 
             <div className="relative h-[480px] overflow-hidden rounded-2xl">
-              <Image src="/about-2.png" alt="TFP players in training" fill className="object-cover" />
+              <Image src="/about-2.webp" alt="TFP players in training" fill className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-6 left-6">
                 <p className="font-sans text-xs text-white/60">Oyo State, Nigeria — 2026 Season</p>
@@ -287,7 +287,7 @@ export default function SponsorsPage() {
       <section
         className="relative py-24 text-center"
         style={{
-          backgroundImage: "url('/sponsors-future.png')",
+          backgroundImage: "url('/sponsors-future.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
