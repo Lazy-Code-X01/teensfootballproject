@@ -163,7 +163,7 @@ export default function DashboardPage() {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="font-sans text-sm font-semibold text-white">Upcoming Fixtures</h2>
-                <p className="mt-0.5 font-sans text-[10px] text-gray-500">Afigio 2026 Season</p>
+                <p className="mt-0.5 font-sans text-[10px] text-gray-500">Afijio 2026 Season</p>
               </div>
               <Link href="/admin/fixtures" className="font-sans text-xs text-primary hover:text-primary-light transition-colors">
                 Manage all

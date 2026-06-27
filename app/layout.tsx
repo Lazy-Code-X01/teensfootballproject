@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | TFP",
   },
   description:
-    "Building Nigeria's next generation of football talent through structured youth development, coaching, and competitive football via the Afigio league.",
+    "Building Nigeria's next generation of football talent through structured youth development, coaching, and competitive football via the Afijio league.",
   metadataBase: new URL("https://teensfootballproject.org"),
   openGraph: {
     title: "Teens Football Project",

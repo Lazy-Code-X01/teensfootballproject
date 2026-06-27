@@ -4,6 +4,7 @@ import Programs from "@/components/sections/Programs";
 import Coaches from "@/components/sections/Coaches";
 import Testimonials from "@/components/sections/Testimonials";
 import AcademyFeatures from "@/components/sections/AcademyFeatures";
+import Partners from "@/components/sections/Partners";
 import CTABanner from "@/components/sections/CTABanner";
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Coaches />
       <Testimonials />
       <AcademyFeatures />
+      <Partners />
       <CTABanner />
     </main>
   );

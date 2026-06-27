@@ -184,7 +184,7 @@ export default function FixturesPage() {
       {/* Top bar */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="font-sans text-base font-semibold text-white">Afigio Fixtures</h2>
+          <h2 className="font-sans text-base font-semibold text-white">Afijio Fixtures</h2>
           <p className="mt-0.5 font-sans text-xs text-gray-500">{counts.all} total · {counts.upcoming} upcoming · {counts.live} live</p>
         </div>
         <button

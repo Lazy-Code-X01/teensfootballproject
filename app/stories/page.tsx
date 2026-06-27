@@ -25,7 +25,7 @@ export default function StoriesPage() {
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative z-10 px-6 text-center">
           <h1 className="font-display text-5xl leading-none text-white md:text-8xl">
-            AFIGIO PLAYER STORIES
+            AFIJIO PLAYER STORIES
           </h1>
         </div>
       </section>

@@ -5,7 +5,7 @@ import { useModal } from "@/context/ModalContext";
 
 const contactItems = [
   {
-    label: "Oyo State, Nigeria",
+    label: "Ibadan: No 2 Akinboade Close, Agodi GRA",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
@@ -14,7 +14,7 @@ const contactItems = [
     ),
   },
   {
-    label: "info@teensfootballproject.org",
+    label: "teensfootballproject@gmail.com",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -52,7 +52,7 @@ export default function CTABanner() {
 
         {/* Body */}
         <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
-          TFP&apos;s operational league, Afigio, is now open for registration. Be part of a movement shaping Nigeria&apos;s next generation of football stars.
+          TFP&apos;s operational league, Afijio, is now open for registration. Be part of a movement shaping Nigeria&apos;s next generation of football stars.
         </p>
 
         {/* CTAs */}

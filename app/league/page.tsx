@@ -49,7 +49,7 @@ export default function LeaguePage() {
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative z-10 px-6 text-center">
           <h1 className="font-display text-5xl leading-none text-white md:text-8xl">
-            AFIGIO
+            AFIJIO
           </h1>
           <p className="mt-4 font-sans text-sm leading-relaxed text-white/60 md:text-base">
             TFP&apos;s official football league — 6 competitive teams, structured fixtures, and a full season of real matches.
@@ -57,7 +57,7 @@ export default function LeaguePage() {
         </div>
       </section>
 
-      {/* Section 1b: What is Afigio */}
+      {/* Section 1b: What is Afijio */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
@@ -66,13 +66,13 @@ export default function LeaguePage() {
                 Under TFP
               </span>
               <h2 className="mt-4 font-display text-4xl leading-none text-dark md:text-5xl">
-                WHAT IS AFIGIO?
+                WHAT IS AFIJIO?
               </h2>
               <p className="mt-6 font-sans text-sm leading-relaxed text-muted">
-                Afigio is the competitive football league that operates under the TFP umbrella. While TFP sets the vision for youth football development in Nigeria, Afigio is where that vision plays out on the pitch — with 6 active teams, a full season calendar, and real competitive football for young players.
+                Afijio is the competitive football league that operates under the TFP umbrella. While TFP sets the vision for youth football development in Nigeria, Afijio is where that vision plays out on the pitch — with 6 active teams, a full season calendar, and real competitive football for young players.
               </p>
               <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
-                Every fixture, every result, every goal scored in Afigio is a step towards TFP&apos;s bigger mission: building Nigeria&apos;s next generation of football talent.
+                Every fixture, every result, every goal scored in Afijio is a step towards TFP&apos;s bigger mission: building Nigeria&apos;s next generation of football talent.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -256,10 +256,10 @@ export default function LeaguePage() {
       <section className="bg-primary py-16">
         <div className="flex flex-col items-center gap-6 px-6 text-center">
           <h2 className="font-display text-3xl leading-none text-white md:text-5xl">
-            WANT YOUR TEAM IN AFIGIO?
+            WANT YOUR TEAM IN AFIJIO?
           </h2>
           <p className="max-w-md font-sans text-sm text-white/80">
-            Register your team under TFP&apos;s Afigio league and compete in structured fixtures across the season.
+            Register your team under TFP&apos;s Afijio league and compete in structured fixtures across the season.
           </p>
           <button
             onClick={() => openModal("register-team")}
