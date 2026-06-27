@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Pencil, Trash2, X, Calendar, Clock, MapPin } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { fixtures as initialFixtures, teams } from "@/lib/mockData";
 
 type Fixture = {
@@ -24,6 +24,8 @@ type FormState = {
 };
 
 type Filter = "all" | "upcoming" | "live" | "completed";
+
+const PAGE_SIZE = 6;
 
 const emptyForm: FormState = { homeTeam: "", awayTeam: "", date: "", time: "", venue: "", status: "upcoming" };
 
@@ -136,6 +138,7 @@ export default function FixturesPage() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [filter, setFilter] = useState<Filter>("all");
+  const [page, setPage] = useState(1);
 
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -170,6 +173,10 @@ export default function FixturesPage() {
   };
 
   const filtered = filter === "all" ? fixtures : fixtures.filter((f) => f.status === filter);
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const setFilterAndReset = (f: Filter) => { setFilter(f); setPage(1); };
 
   const tabs: { key: Filter; label: string }[] = [
     { key: "all",       label: "All" },
@@ -201,7 +208,7 @@ export default function FixturesPage() {
         {tabs.map((tab) => (
           <button
             key={tab.key}
-            onClick={() => setFilter(tab.key)}
+            onClick={() => setFilterAndReset(tab.key)}
             className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 font-sans text-xs font-semibold transition-all duration-150 ${
               filter === tab.key
                 ? "bg-primary text-white shadow-lg shadow-primary/20"
@@ -219,7 +226,7 @@ export default function FixturesPage() {
       </div>
 
       {/* Fixture cards */}
-      {filtered.length === 0 ? (
+      {paginated.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-2xl py-16 text-center" style={{ background: "#111", border: "1px solid rgba(255,255,255,0.05)" }}>
           <Calendar className="mb-3 h-10 w-10 text-gray-700" />
           <p className="font-sans text-sm text-gray-500">No {filter === "all" ? "" : filter} fixtures yet.</p>
@@ -229,7 +236,7 @@ export default function FixturesPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((f) => {
+          {paginated.map((f) => {
             const cfg = statusConfig[f.status] ?? statusConfig.upcoming;
             return (
               <div
@@ -286,6 +293,46 @@ export default function FixturesPage() {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between">
+          <p className="font-sans text-xs text-gray-500">
+            Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, filtered.length)} of {filtered.length}
+          </p>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+              <button
+                key={n}
+                onClick={() => setPage(n)}
+                className={`flex h-8 w-8 items-center justify-center rounded-lg font-sans text-xs font-semibold transition-colors ${
+                  page === n
+                    ? "bg-primary text-white"
+                    : "text-gray-500 hover:bg-white/[0.06] hover:text-white"
+                }`}
+              >
+                {n}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       )}
 
