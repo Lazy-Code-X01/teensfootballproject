@@ -23,11 +23,11 @@ type FormState = {
 };
 
 const initialSponsors: Sponsor[] = [
-  { id: 1, name: "Stanbic IBTC",       tier: "Platinum", logo: "",  website: "https://stanbicibtc.com",  since: "2024" },
-  { id: 2, name: "MTN Nigeria",         tier: "Gold",     logo: "",  website: "https://mtn.ng",           since: "2025" },
-  { id: 3, name: "Oyo State Ministry",  tier: "Gold",     logo: "",  website: "",                         since: "2024" },
-  { id: 4, name: "Adidas West Africa",  tier: "Silver",   logo: "",  website: "",                         since: "2026" },
-  { id: 5, name: "Local Foods Co.",     tier: "Bronze",   logo: "",  website: "",                         since: "2026" },
+  { id: 1, name: "The Oguntoyinbo Foundation", tier: "Platinum", logo: "/oguntoyinbo-foundation.webp", website: "",                              since: "2024" },
+  { id: 2, name: "7Eleven Foundation",         tier: "Gold",     logo: "/7eleven-foundation.webp",     website: "",                              since: "2025" },
+  { id: 3, name: "Oyo State Ministry",         tier: "Silver",   logo: "",                             website: "",                              since: "2024" },
+  { id: 4, name: "T & A Legal",                tier: "Bronze",   logo: "",                             website: "",                              since: "2026" },
+  { id: 5, name: "Madux Vision",               tier: "Bronze",   logo: "/madux-badge.webp",            website: "",                              since: "2026" },
 ];
 
 const TIERS: Tier[] = ["Platinum", "Gold", "Silver", "Bronze"];

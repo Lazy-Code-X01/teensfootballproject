@@ -1,16 +1,22 @@
+import Image from "next/image";
+
 const partners = [
-  { id: 1, name: "Partner 1" },
-  { id: 2, name: "Partner 2" },
-  { id: 3, name: "Partner 3" },
-  { id: 4, name: "Partner 4" },
-  { id: 5, name: "Partner 5" },
-  { id: 6, name: "Partner 6" },
+  { id: 1, name: "The Oguntoyinbo Foundation", logo: "/oguntoyinbo-foundation.webp" },
+  { id: 2, name: "7Eleven Foundation",         logo: "/7eleven-foundation.webp"     },
+  { id: 3, name: "Oyo State Ministry",         logo: ""                              },
+  { id: 4, name: "T & A Legal",                logo: ""                              },
+  { id: 5, name: "Madux Vision FC",            logo: "/madux-badge.webp"            },
+  { id: 6, name: "Dannaz FC",                  logo: "/dannaz-badge.webp"           },
 ];
 
-function LogoSlot({ name }: { name: string }) {
+function LogoSlot({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="mx-4 flex h-16 w-36 shrink-0 items-center justify-center rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5">
-      <span className="font-sans text-xs text-gray-300">{name}</span>
+    <div className="mx-4 flex h-16 w-40 shrink-0 items-center justify-center rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 transition-colors duration-200 hover:border-primary/40 hover:bg-primary/5">
+      {logo ? (
+        <Image src={logo} alt={name} width={120} height={48} className="max-h-10 w-auto object-contain" />
+      ) : (
+        <span className="font-sans text-xs font-semibold text-gray-400">{name}</span>
+      )}
     </div>
   );
 }
@@ -31,7 +37,7 @@ export default function Partners() {
       <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
           {[...partners, ...partners].map((p, i) => (
-            <LogoSlot key={i} name={p.name} />
+            <LogoSlot key={i} name={p.name} logo={p.logo} />
           ))}
         </div>
       </div>
