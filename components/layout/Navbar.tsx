@@ -50,7 +50,7 @@ export default function Navbar() {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1 shrink-0">
+          <Link href="/" className="flex items-center gap-0.5 shrink-0">
             <div className="relative h-14 w-12 overflow-hidden">
               <Image
                 src="/tfp-logo.png"
@@ -61,7 +61,7 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span className="hidden sm:block text-sm font-semibold text-white/80 leading-tight">
+            <span className="hidden sm:block text-[13px] font-semibold text-white/80 leading-[1.3]">
               Teens Football<br />Project
             </span>
           </Link>
