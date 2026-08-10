@@ -50,17 +50,20 @@ export default function Navbar() {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
             <div className="relative h-12 w-12 overflow-hidden rounded-sm">
               <Image
                 src="/tfp-logo.png"
                 alt="Teens Football Project"
                 fill
                 className="object-contain"
-                style={{ transform: "scale(2.9)", transformOrigin: "center" }}
+                style={{ transform: "scale(2.2)", transformOrigin: "center" }}
                 priority
               />
             </div>
+            <span className="hidden sm:block text-sm font-semibold text-white/80 leading-tight">
+              Teens Football<br />Project
+            </span>
           </Link>
 
           {/* Desktop nav links */}
