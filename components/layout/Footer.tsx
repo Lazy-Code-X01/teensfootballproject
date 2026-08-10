@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const quickLinks = [
   { label: "Home",     href: "/" },
@@ -42,8 +43,16 @@ export default function Footer() {
 
           {/* Column 1: Brand */}
           <div className="flex flex-col gap-4">
-            <Link href="/" className="font-display text-2xl text-primary">
-              TFP
+            <Link href="/" className="block">
+              <div className="relative h-14 w-14 overflow-hidden rounded-sm">
+                <Image
+                  src="/tfp-logo.png"
+                  alt="Teens Football Project"
+                  fill
+                  className="object-contain"
+                  style={{ transform: "scale(2.9)", transformOrigin: "center" }}
+                />
+              </div>
             </Link>
             <p className="font-sans text-sm leading-relaxed text-muted max-w-[260px]">
               Empowering the next generation of footballers across Nigeria through

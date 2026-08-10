@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useModal } from "@/context/ModalContext";
 
@@ -49,13 +50,17 @@ export default function Navbar() {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="font-display text-2xl tracking-wider text-primary-light">
-              TFP
-            </span>
-            <span className="hidden sm:block text-sm font-semibold text-white/80 leading-tight">
-              Teens Football<br />Project
-            </span>
+          <Link href="/" className="flex items-center shrink-0">
+            <div className="relative h-12 w-12 overflow-hidden rounded-sm">
+              <Image
+                src="/tfp-logo.png"
+                alt="Teens Football Project"
+                fill
+                className="object-contain"
+                style={{ transform: "scale(2.9)", transformOrigin: "center" }}
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop nav links */}
