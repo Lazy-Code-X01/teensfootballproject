@@ -36,7 +36,7 @@ export default function Partners() {
       {/* Marquee track */}
       <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-          {[...partners, ...partners].map((p, i) => (
+          {[...partners, ...partners].filter(p => p.logo).map((p, i) => (
             <LogoSlot key={i} name={p.name} logo={p.logo} />
           ))}
         </div>
