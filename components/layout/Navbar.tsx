@@ -51,13 +51,13 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 shrink-0">
-            <div className="relative h-12 w-12 overflow-hidden rounded-sm">
+            <div className="relative h-14 w-12 overflow-hidden">
               <Image
                 src="/tfp-logo.png"
                 alt="Teens Football Project"
                 fill
                 className="object-contain"
-                style={{ transform: "scale(2.0)", transformOrigin: "center 58%" }}
+                style={{ transform: "scale(2.2)", transformOrigin: "center" }}
                 priority
               />
             </div>
