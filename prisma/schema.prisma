@@ -1,0 +1,101 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+model Team {
+  id        Int    @id @default(autoincrement())
+  name      String @unique
+  shortName String
+  founded   Int    @default(2024)
+  city      String @default("")
+  stadium   String @default("")
+  coach     String @default("")
+  logo      String @default("")
+}
+
+model Fixture {
+  id       Int    @id @default(autoincrement())
+  homeTeam String
+  awayTeam String
+  date     String
+  time     String
+  venue    String @default("Afijio Pitch, Oyo")
+  status   String @default("upcoming")
+}
+
+model Result {
+  id        Int    @id @default(autoincrement())
+  homeTeam  String
+  awayTeam  String
+  homeScore Int
+  awayScore Int
+  date      String
+}
+
+model Standing {
+  id       Int    @id @default(autoincrement())
+  team     String @unique
+  position Int
+  played   Int    @default(0)
+  won      Int    @default(0)
+  drawn    Int    @default(0)
+  lost     Int    @default(0)
+  points   Int    @default(0)
+}
+
+model Sponsor {
+  id      Int    @id @default(autoincrement())
+  name    String
+  tier    String
+  logo    String @default("")
+  website String @default("")
+  since   String
+}
+
+model GalleryItem {
+  id      Int    @id @default(autoincrement())
+  image   String
+  caption String @default("")
+}
+
+model NewsItem {
+  id       Int      @id @default(autoincrement())
+  title    String
+  excerpt  String
+  category String   @default("General")
+  image    String   @default("")
+  date     String
+  createdAt DateTime @default(now())
+}
+
+model Settings {
+  id            Int    @id @default(1)
+  siteName      String @default("Teens Football Project")
+  tagline       String @default("PLAY. RISE. REPEAT.")
+  email         String @default("")
+  phone         String @default("")
+  addressIbadan String @default("")
+  addressOyo    String @default("")
+  instagram     String @default("")
+  twitter       String @default("")
+  facebook      String @default("")
+  youtube       String @default("")
+  leagueName    String @default("Afijio Teens Football League")
+  season        String @default("2026")
+  matchDay      String @default("")
+}
+
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String   @default("")
+  ageGroup  String   @default("")
+  message   String
+  createdAt DateTime @default(now())
+}

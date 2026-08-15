@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Newspaper, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { newsItems as initialNews } from "@/lib/mockMedia";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 type NewsItem = {
   id: number;
@@ -87,10 +87,7 @@ function NewsModal({
                 {categories.map((c) => <option key={c}>{c}</option>)}
               </select>
             </div>
-            <div>
-              <label className={labelClass}>Image URL</label>
-              <input className={inputClass} placeholder="/image.webp or https://..." value={form.image} onChange={(e) => set("image", e.target.value)} />
-            </div>
+            <ImageUploadField label="Cover Image (optional)" value={form.image} onChange={(url) => set("image", url)} />
           </div>
           <div className="mt-2 flex gap-3">
             <button type="submit" className="rounded-full bg-primary px-5 py-2 font-sans text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
@@ -107,11 +104,18 @@ function NewsModal({
 }
 
 export default function NewsPage() {
-  const [news, setNews] = useState<NewsItem[]>(initialNews);
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then(r => r.json())
+      .then(data => { setNews(data); setLoading(false); });
+  }, []);
 
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
   const openAdd = () => { setForm(emptyForm); setEditingId(null); setModalOpen(true); };
@@ -120,14 +124,22 @@ export default function NewsPage() {
     setEditingId(n.id);
     setModalOpen(true);
   };
-  const handleDelete = (id: number) => setNews((p) => p.filter((n) => n.id !== id));
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/news/${id}`, { method: 'DELETE' });
+    setNews(prev => prev.filter(n => n.id !== id));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (editingId !== null) {
-      setNews((p) => p.map((n) => n.id === editingId ? { ...n, ...form } : n));
+      const res = await fetch(`/api/news/${editingId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const updated = await res.json();
+      setNews(prev => prev.map(n => n.id === editingId ? updated : n));
     } else {
-      const newId = Math.max(0, ...news.map((n) => n.id)) + 1;
-      setNews((p) => [{ id: newId, date: new Date().toISOString().slice(0, 10), ...form }, ...p]);
+      const res = await fetch('/api/news', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const created = await res.json();
+      setNews(prev => [created, ...prev]);
     }
     setModalOpen(false);
     setForm(emptyForm);
@@ -136,6 +148,8 @@ export default function NewsPage() {
 
   const totalPages = Math.ceil(news.length / PAGE_SIZE);
   const paginated = news.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

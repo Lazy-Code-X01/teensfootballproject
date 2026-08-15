@@ -7,33 +7,21 @@ type Segment = { text: string; muted: boolean };
 const testimonials = [
   {
     segments: [
-      { text: '"THE COACHES ARE AMAZING, ', muted: false },
-      { text: "MY SON'S SKILLS ", muted: true },
-      { text: 'SOARED THIS SEASON!"', muted: false },
+      { text: '"IT DID NOT JUST CHANGE HIS GAME.', muted: false },
+      { text: ' IT CHANGED OUR HOME."', muted: true },
     ] as Segment[],
-    name: "Mrs. Fatima Balogun",
-    role: "Parent of U16 Player",
-    initials: "FB",
+    name: "Parent of an ATFL Player",
+    role: "Afijio Community",
+    initials: "AP",
   },
   {
     segments: [
-      { text: '"TFP GAVE MY SON ', muted: false },
-      { text: 'STRUCTURE ', muted: true },
-      { text: 'AND A REAL DREAM!"', muted: false },
+      { text: '"MY COACH WAS THE FIRST TO SAY', muted: false },
+      { text: ' I HAD SOMETHING WORTH DEVELOPING."', muted: true },
     ] as Segment[],
-    name: "Mr. Chidi Okonkwo",
-    role: "Parent of U14 Player",
-    initials: "CO",
-  },
-  {
-    segments: [
-      { text: '"FROM SHY KID ', muted: false },
-      { text: 'TO CONFIDENT PLAYER. ', muted: true },
-      { text: 'TFP IS REAL!"', muted: false },
-    ] as Segment[],
-    name: "Mr. Segun Adewale",
-    role: "Parent of U17 Player",
-    initials: "SA",
+    name: "Rising Players Program Participant",
+    role: "Age 15",
+    initials: "RP",
   },
 ];
 

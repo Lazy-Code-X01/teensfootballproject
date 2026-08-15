@@ -1,8 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { highlights, galleryItems, newsItems } from "@/lib/mockMedia";
 import { useModal } from "@/context/ModalContext";
+
+type Highlight  = { id: string; thumbnail: string; title: string; date: string; duration: string };
+type GalleryItem = { id: string; image: string; caption: string };
+type NewsItem    = { id: string; title: string; excerpt: string; category: string; image: string; date: string };
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
@@ -10,6 +14,27 @@ function formatDate(dateStr: string) {
 
 export default function MediaPage() {
   const { openModal } = useModal();
+
+  // highlights has no API endpoint yet — kept as an empty array
+  const highlights: Highlight[] = [];
+
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
+  const [newsItems, setNewsItems]       = useState<NewsItem[]>([]);
+  const [galleryLoading, setGalleryLoading] = useState(true);
+  const [newsLoading, setNewsLoading]       = useState(true);
+
+  useEffect(() => {
+    fetch("/api/gallery")
+      .then((r) => r.json())
+      .then((data) => setGalleryItems(data))
+      .finally(() => setGalleryLoading(false));
+
+    fetch("/api/news")
+      .then((r) => r.json())
+      .then((data) => setNewsItems(data))
+      .finally(() => setNewsLoading(false));
+  }, []);
+
   return (
     <main>
 
@@ -83,27 +108,31 @@ export default function MediaPage() {
           <h2 className="font-display text-4xl leading-none text-dark">PHOTO GALLERY</h2>
           <p className="mt-2 mb-12 font-sans text-sm text-muted">Moments captured from training, matches, and everything in between</p>
 
-          <div className="columns-2 gap-4 md:columns-4">
-            {galleryItems.map((item, i) => (
-              <div key={item.id} className="group relative mb-4 cursor-pointer overflow-hidden rounded-2xl">
-                <div
-                  className="relative w-full"
-                  style={{ height: ["260px","200px","320px","180px","280px","240px","200px","300px"][i % 8] }}
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.caption}
-                    fill
-                    className="object-cover transition-opacity duration-300 group-hover:opacity-80"
-                  />
+          {galleryLoading ? (
+            <div className="py-20 text-center font-sans text-sm text-muted">Loading...</div>
+          ) : (
+            <div className="columns-2 gap-4 md:columns-4">
+              {galleryItems.map((item, i) => (
+                <div key={item.id} className="group relative mb-4 cursor-pointer overflow-hidden rounded-2xl">
+                  <div
+                    className="relative w-full"
+                    style={{ height: ["260px","200px","320px","180px","280px","240px","200px","300px"][i % 8] }}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.caption}
+                      fill
+                      className="object-cover transition-opacity duration-300 group-hover:opacity-80"
+                    />
+                  </div>
+                  {/* Caption on hover */}
+                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <p className="font-sans text-xs text-white">{item.caption}</p>
+                  </div>
                 </div>
-                {/* Caption on hover */}
-                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <p className="font-sans text-xs text-white">{item.caption}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -113,32 +142,36 @@ export default function MediaPage() {
           <h2 className="font-display text-4xl leading-none text-white">LATEST NEWS</h2>
           <p className="mt-2 mb-12 font-sans text-sm text-muted">Stay updated with everything happening at TFP</p>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {newsItems.map((item) => (
-              <div key={item.id} className="overflow-hidden rounded-2xl bg-[#0d0d0d]">
+          {newsLoading ? (
+            <div className="py-20 text-center font-sans text-sm text-muted">Loading...</div>
+          ) : (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              {newsItems.map((item) => (
+                <div key={item.id} className="overflow-hidden rounded-2xl bg-[#0d0d0d]">
 
-                {/* Image + category badge */}
-                <div className="relative h-[200px] w-full">
-                  <Image src={item.image} alt={item.title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/20" />
-                  <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 font-sans text-xs text-white">
-                    {item.category}
-                  </span>
+                  {/* Image + category badge */}
+                  <div className="relative h-[200px] w-full">
+                    <Image src={item.image} alt={item.title} fill className="object-cover" />
+                    <div className="absolute inset-0 bg-black/20" />
+                    <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 font-sans text-xs text-white">
+                      {item.category}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <p className="font-sans text-xs text-muted">{formatDate(item.date)}</p>
+                    <h3 className="mt-2 font-display text-lg leading-tight text-white">{item.title}</h3>
+                    <p className="mt-3 font-sans text-sm leading-relaxed text-muted">{item.excerpt}</p>
+                    <button className="mt-4 font-sans text-sm font-semibold text-primary transition-colors hover:text-primary-light">
+                      Read More
+                    </button>
+                  </div>
+
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <p className="font-sans text-xs text-muted">{formatDate(item.date)}</p>
-                  <h3 className="mt-2 font-display text-lg leading-tight text-white">{item.title}</h3>
-                  <p className="mt-3 font-sans text-sm leading-relaxed text-muted">{item.excerpt}</p>
-                  <button className="mt-4 font-sans text-sm font-semibold text-primary transition-colors hover:text-primary-light">
-                    Read More
-                  </button>
-                </div>
-
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -6,22 +6,22 @@ const values = [
   {
     icon: <Trophy className="h-8 w-8 text-primary" />,
     title: "Excellence",
-    body: "We pursue the highest standards in training, coaching, and player development.",
+    body: "We don't celebrate showing up. We celebrate showing up and giving everything — because we know what these teenagers are capable of.",
   },
   {
     icon: <Handshake className="h-8 w-8 text-primary" />,
     title: "Teamwork",
-    body: "Football is a team sport. We build players who lift each other up on and off the pitch.",
+    body: "The most talented player on the pitch still cannot win alone. What you learn about teamwork here follows you for the rest of your life.",
   },
   {
     icon: <GraduationCap className="h-8 w-8 text-primary" />,
     title: "Education",
-    body: "We balance football with academics because we develop whole human beings, not just athletes.",
+    body: "A teenager who plays football but drops out of school is not a success story. At TFP, football and education are partners, not enemies.",
   },
   {
     icon: <Globe className="h-8 w-8 text-primary" />,
     title: "Community",
-    body: "TFP is rooted in the community. We give back, we grow together, we rise together.",
+    body: "TFP is not a brand that descends on communities. It grows from within them. Every league, every team, every coach is connected to the community it serves.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function AboutPage() {
             ABOUT TFP
           </h1>
           <p className="mt-4 font-sans text-sm leading-relaxed text-white/60 md:text-base">
-            From grassroots to the global stage. This is our journey.
+            From one pitch in Afijio to a movement changing Nigeria.
           </p>
         </div>
       </section>
@@ -101,18 +101,18 @@ export default function AboutPage() {
                 Who We Are
               </span>
               <h2 className="mt-4 font-display text-4xl leading-none text-dark md:text-5xl">
-                BUILDING CHAMPIONS ON AND OFF THE PITCH
+                IT STARTED WITH A QUESTION NOBODY WAS ASKING
               </h2>
               <p className="mt-6 font-sans text-sm leading-relaxed text-muted">
-                Teens Football Project (TFP) was founded with one mission — to give Nigerian teenagers
-                a structured, professional pathway from grassroots football to global recognition. We
-                believe every talented young player deserves the right environment, the right coaching,
-                and the right opportunities to shine.
+                What happens to a teenager in Nigeria who loves football but has no structure around
+                them? They play on roads. They train on rubble. They watch their talent go nowhere —
+                not because they aren&apos;t good enough, but because nobody built a proper platform
+                for them.
               </p>
               <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
-                What started as a small local league in Oyo State has grown into a movement. TFP now
-                runs 3 active seasons, develops 500+ players annually, and has helped young talents
-                earn trials with professional clubs.
+                The Afijio Teens Football League launched as TFP&apos;s very first community project.
+                Six teams. One pitch. And results that nobody expected. What happened in Afijio was
+                not a coincidence — it was a model. And models are meant to be replicated.
               </p>
               <Link
                 href="/contact"

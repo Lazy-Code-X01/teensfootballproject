@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 
 const contactItems = [
   {
@@ -94,6 +96,35 @@ const inputClass =
 const labelClass = "mb-2 block font-sans text-sm text-white/80";
 
 export default function ContactPage() {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", ageGroup: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          ageGroup: form.ageGroup,
+          message: form.message,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setForm({ name: "", email: "", phone: "", ageGroup: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <main>
 
@@ -169,26 +200,52 @@ export default function ContactPage() {
 
           {/* Right: Contact Form */}
           <div className="rounded-2xl bg-[#0d0d0d] p-8">
-            <form className="flex flex-col gap-5">
+            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
 
               <div>
                 <label htmlFor="name" className={labelClass}>Full Name</label>
-                <input id="name" type="text" placeholder="e.g. Emeka Johnson" className={inputClass} />
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="e.g. Emeka Johnson"
+                  className={inputClass}
+                  value={form.name}
+                  onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+                />
               </div>
 
               <div>
                 <label htmlFor="email" className={labelClass}>Email Address</label>
-                <input id="email" type="email" placeholder="you@example.com" className={inputClass} />
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  className={inputClass}
+                  value={form.email}
+                  onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+                />
               </div>
 
               <div>
                 <label htmlFor="phone" className={labelClass}>Phone Number</label>
-                <input id="phone" type="text" placeholder="+234 800 000 0000" className={inputClass} />
+                <input
+                  id="phone"
+                  type="text"
+                  placeholder="+234 800 000 0000"
+                  className={inputClass}
+                  value={form.phone}
+                  onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
+                />
               </div>
 
               <div>
                 <label htmlFor="ageGroup" className={labelClass}>Age Group</label>
-                <select id="ageGroup" className={inputClass}>
+                <select
+                  id="ageGroup"
+                  className={inputClass}
+                  value={form.ageGroup}
+                  onChange={(e) => setForm((p) => ({ ...p, ageGroup: e.target.value }))}
+                >
                   <option value="" disabled>Select an option</option>
                   <option value="u13">U13 Grassroots</option>
                   <option value="u16">U16 Rising Players</option>
@@ -205,15 +262,25 @@ export default function ContactPage() {
                   rows={4}
                   placeholder="Tell us how we can help..."
                   className={inputClass}
+                  value={form.message}
+                  onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
                 />
               </div>
 
               <button
                 type="submit"
-                className="mt-2 w-full rounded-full bg-primary py-4 font-sans text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+                disabled={status === "sending"}
+                className="mt-2 w-full rounded-full bg-primary py-4 font-sans text-sm font-semibold text-white transition-colors hover:bg-primary-dark disabled:opacity-60"
               >
-                Send Message
+                {status === "sending" ? "Sending..." : "Send Message"}
               </button>
+
+              {status === "success" && (
+                <p className="mt-3 font-sans text-sm text-primary">Message sent! We'll be in touch soon.</p>
+              )}
+              {status === "error" && (
+                <p className="mt-3 font-sans text-sm text-red-400">Something went wrong. Please try again.</p>
+              )}
 
             </form>
           </div>

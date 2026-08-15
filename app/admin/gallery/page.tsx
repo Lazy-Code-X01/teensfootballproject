@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { galleryItems as initialGallery } from "@/lib/mockMedia";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 type GalleryItem = { id: number; image: string; caption: string };
 type FormState = { image: string; caption: string };
@@ -45,10 +45,7 @@ function GalleryModal({
         </div>
 
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          <div>
-            <label className={labelClass}>Image URL</label>
-            <input className={inputClass} placeholder="/photo.webp or https://..." value={form.image} onChange={(e) => set("image", e.target.value)} required />
-          </div>
+          <ImageUploadField label="Image" value={form.image} onChange={(url) => set("image", url)} required />
           {form.image && (
             <div className="relative h-40 w-full overflow-hidden rounded-xl bg-white/[0.03]">
               <Image src={form.image} alt="preview" fill className="object-cover" />
@@ -73,23 +70,38 @@ function GalleryModal({
 }
 
 export default function GalleryPage() {
-  const [items, setItems] = useState<GalleryItem[]>(initialGallery);
+  const [items, setItems] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [page, setPage] = useState(1);
 
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then(r => r.json())
+      .then(data => { setItems(data); setLoading(false); });
+  }, []);
+
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
   const openAdd = () => { setForm(emptyForm); setEditingId(null); setModalOpen(true); };
   const openEdit = (item: GalleryItem) => { setForm({ image: item.image, caption: item.caption }); setEditingId(item.id); setModalOpen(true); };
-  const handleDelete = (id: number) => setItems((p) => p.filter((i) => i.id !== id));
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/gallery/${id}`, { method: 'DELETE' });
+    setItems(prev => prev.filter(i => i.id !== id));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (editingId !== null) {
-      setItems((p) => p.map((i) => i.id === editingId ? { ...i, ...form } : i));
+      const res = await fetch(`/api/gallery/${editingId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const updated = await res.json();
+      setItems(prev => prev.map(i => i.id === editingId ? updated : i));
     } else {
-      const newId = Math.max(0, ...items.map((i) => i.id)) + 1;
-      setItems((p) => [...p, { id: newId, ...form }]);
+      const res = await fetch('/api/gallery', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const created = await res.json();
+      setItems(prev => [...prev, created]);
     }
     setModalOpen(false);
     setEditingId(null);
@@ -97,6 +109,8 @@ export default function GalleryPage() {
 
   const totalPages = Math.ceil(items.length / PAGE_SIZE);
   const paginated = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

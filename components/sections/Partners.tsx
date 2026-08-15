@@ -3,10 +3,8 @@ import Image from "next/image";
 const partners = [
   { id: 1, name: "The Oguntoyinbo Foundation", logo: "/oguntoyinbo-foundation.webp" },
   { id: 2, name: "7Eleven Foundation",         logo: "/7eleven-foundation.webp"     },
-  { id: 3, name: "Oyo State Ministry",         logo: ""                              },
-  { id: 4, name: "T & A Legal",                logo: ""                              },
-  { id: 5, name: "Madux Vision FC",            logo: "/madux-badge.webp"            },
-  { id: 6, name: "Dannaz FC",                  logo: "/dannaz-badge.webp"           },
+  { id: 3, name: "Madux Vision FC",            logo: "/madux-badge.webp"            },
+  { id: 4, name: "Dannaz FC",                  logo: "/dannaz-badge.webp"           },
 ];
 
 function LogoSlot({ name, logo }: { name: string; logo: string }) {

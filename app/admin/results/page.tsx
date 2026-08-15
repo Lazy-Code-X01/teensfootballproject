@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
-import { results as initialResults, teams } from "@/lib/mockData";
+import { teams } from "@/lib/mockData";
 
 type Result = {
   id: number;
@@ -115,11 +115,18 @@ function ResultModal({
 }
 
 export default function ResultsPage() {
-  const [results, setResults] = useState<Result[]>(initialResults);
+  const [results, setResults] = useState<Result[]>([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetch('/api/results')
+      .then(r => r.json())
+      .then(data => { setResults(data); setLoading(false); });
+  }, []);
 
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -131,16 +138,22 @@ export default function ResultsPage() {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => setResults((p) => p.filter((r) => r.id !== id));
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/results/${id}`, { method: 'DELETE' });
+    setResults(prev => prev.filter(r => r.id !== id));
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = { homeTeam: form.homeTeam, awayTeam: form.awayTeam, homeScore: Number(form.homeScore), awayScore: Number(form.awayScore), date: form.date };
     if (editingId !== null) {
-      setResults((p) => p.map((r) => r.id === editingId ? { ...r, ...parsed } : r));
+      const res = await fetch(`/api/results/${editingId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+      const updated = await res.json();
+      setResults(prev => prev.map(r => r.id === editingId ? updated : r));
     } else {
-      const newId = Math.max(0, ...results.map((r) => r.id)) + 1;
-      setResults((p) => [...p, { id: newId, ...parsed }]);
+      const res = await fetch('/api/results', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+      const created = await res.json();
+      setResults(prev => [...prev, created]);
     }
     setModalOpen(false);
     setForm(emptyForm);
@@ -149,6 +162,8 @@ export default function ResultsPage() {
 
   const totalPages = Math.ceil(results.length / PAGE_SIZE);
   const paginated = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Users, MapPin, UserRound, Shield } from "lucide-react";
 import Image from "next/image";
-import { teams as initialTeams, results } from "@/lib/mockData";
+import ImageUploadField from "@/components/admin/ImageUploadField";
+import { results } from "@/lib/mockData";
 
 type Team = {
   id: number;
@@ -29,10 +30,6 @@ type FormState = {
 const emptyForm: FormState = { name: "", shortName: "", founded: "", city: "", stadium: "", coach: "", logo: "" };
 const inputClass = "w-full rounded-xl bg-[#1a1a1a] border border-gray-800 px-3 py-2.5 font-sans text-sm text-white outline-none focus:border-primary transition-colors placeholder:text-gray-700";
 const labelClass = "mb-1.5 block font-sans text-xs text-gray-500";
-
-function toTeam(t: typeof initialTeams[number]): Team {
-  return { ...t, city: "", stadium: "", coach: "", logo: "" };
-}
 
 function getTeamStats(name: string) {
   let played = 0, won = 0, drawn = 0, lost = 0;
@@ -121,10 +118,7 @@ function TeamModal({
           </div>
 
           {/* Logo */}
-          <div>
-            <label className={labelClass}>Logo / Badge URL (optional)</label>
-            <input className={inputClass} placeholder="/badge.webp or https://..." value={form.logo} onChange={(e) => set("logo", e.target.value)} />
-          </div>
+          <ImageUploadField label="Team Logo (optional)" value={form.logo} onChange={(url) => set("logo", url)} />
 
           {form.logo && (
             <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] p-3">
@@ -150,10 +144,17 @@ function TeamModal({
 }
 
 export default function TeamsPage() {
-  const [teams, setTeams] = useState<Team[]>(initialTeams.map(toTeam));
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
+
+  useEffect(() => {
+    fetch('/api/teams')
+      .then(r => r.json())
+      .then(data => { setTeams(data); setLoading(false); });
+  }, []);
 
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -164,11 +165,14 @@ export default function TeamsPage() {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => setTeams((p) => p.filter((t) => t.id !== id));
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/teams/${id}`, { method: 'DELETE' });
+    setTeams(prev => prev.filter(t => t.id !== id));
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const parsed: Omit<Team, "id"> = {
+    const parsed = {
       name: form.name,
       shortName: form.shortName,
       founded: Number(form.founded),
@@ -178,14 +182,19 @@ export default function TeamsPage() {
       logo: form.logo,
     };
     if (editingId !== null) {
-      setTeams((p) => p.map((t) => t.id === editingId ? { ...t, ...parsed } : t));
+      const res = await fetch(`/api/teams/${editingId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+      const updated = await res.json();
+      setTeams(prev => prev.map(t => t.id === editingId ? updated : t));
     } else {
-      const newId = Math.max(0, ...teams.map((t) => t.id)) + 1;
-      setTeams((p) => [...p, { id: newId, ...parsed }]);
+      const res = await fetch('/api/teams', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+      const created = await res.json();
+      setTeams(prev => [...prev, created]);
     }
     setModalOpen(false);
     setEditingId(null);
   };
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

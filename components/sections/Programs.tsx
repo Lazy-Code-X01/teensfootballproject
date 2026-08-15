@@ -5,9 +5,9 @@ import Image from "next/image";
 import { useModal } from "@/context/ModalContext";
 
 const programs = [
-  { image: "/program-1.webp", label: "Grassroots Program",       sublabel: "Ages 10 - 13" },
-  { image: "/program-2.webp", label: "Rising Players Program",   sublabel: "Ages 14 - 16" },
-  { image: "/program-3.webp", label: "Elite & Exposure Program", sublabel: "Ages 17 - 19" },
+  { image: "/program-1.webp", label: "Grassroots Program",       sublabel: "Ages 10 - 13", tagline: "The Beginning of Everything"      },
+  { image: "/program-2.webp", label: "Rising Players Program",   sublabel: "Ages 14 - 16", tagline: "This Is Where Good Becomes Great"  },
+  { image: "/program-3.webp", label: "Elite & Exposure Program", sublabel: "Ages 17 - 19", tagline: "The Door to What's Next"            },
 ];
 
 export default function Programs() {
@@ -46,8 +46,8 @@ export default function Programs() {
           OUR PROGRAMS
         </h2>
         <p className="max-w-xs font-sans text-sm leading-relaxed text-muted md:pt-2 md:ml-auto md:text-right">
-          Comprehensive training programs crafted for every age, skill level,
-          and ambition on the journey to football excellence.
+          You don&apos;t have to be the best to join TFP. Just willing. There is
+          a program for where you are now and a pathway to where you&apos;re going.
         </p>
       </div>
 
@@ -76,6 +76,9 @@ export default function Programs() {
 
             {/* Text: bottom left */}
             <div className="absolute bottom-0 left-0 p-5">
+              <p className="font-sans text-xs text-primary-light mb-1">
+                {program.tagline}
+              </p>
               <p className="font-display text-xl leading-none text-white">
                 {program.label}
               </p>

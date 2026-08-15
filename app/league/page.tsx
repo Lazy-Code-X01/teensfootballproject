@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { teams, fixtures, results, standings } from "@/lib/mockData";
+import { useState, useEffect } from "react";
 import { useModal } from "@/context/ModalContext";
 
 type Tab = "fixtures" | "results" | "standings" | "teams";
+
+type Team     = { id: string; name: string; shortName: string; founded: string; logo: string };
+type Fixture  = { id: string; homeTeam: string; awayTeam: string; date: string; time: string; venue: string; status: string };
+type Result   = { id: string; homeTeam: string; awayTeam: string; homeScore: number; awayScore: number; date: string };
+type Standing = { id: string; team: string; position: number; played: number; won: number; drawn: number; lost: number; points: number };
 
 const tabs: { key: Tab; label: string }[] = [
   { key: "fixtures",  label: "Fixtures"  },
@@ -26,13 +30,45 @@ function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 }
 
-function getShortName(teamName: string) {
-  return teams.find((t) => t.name === teamName)?.shortName ?? teamName.slice(0, 3).toUpperCase();
-}
-
 export default function LeaguePage() {
   const [activeTab, setActiveTab] = useState<Tab>("fixtures");
   const { openModal } = useModal();
+
+  const [teams, setTeams]       = useState<Team[]>([]);
+  const [fixtures, setFixtures] = useState<Fixture[]>([]);
+  const [results, setResults]   = useState<Result[]>([]);
+  const [standings, setStandings] = useState<Standing[]>([]);
+  const [loading, setLoading]   = useState(true);
+
+  useEffect(() => {
+    async function fetchAll() {
+      try {
+        const [teamsRes, fixturesRes, resultsRes, standingsRes] = await Promise.all([
+          fetch("/api/teams"),
+          fetch("/api/fixtures"),
+          fetch("/api/results"),
+          fetch("/api/standings"),
+        ]);
+        const [teamsData, fixturesData, resultsData, standingsData] = await Promise.all([
+          teamsRes.json(),
+          fixturesRes.json(),
+          resultsRes.json(),
+          standingsRes.json(),
+        ]);
+        setTeams(teamsData);
+        setFixtures(fixturesData);
+        setResults(resultsData);
+        setStandings(standingsData);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAll();
+  }, []);
+
+  function getShortName(teamName: string) {
+    return teams.find((t) => t.name === teamName)?.shortName ?? teamName.slice(0, 3).toUpperCase();
+  }
 
   return (
     <main>
@@ -113,140 +149,146 @@ export default function LeaguePage() {
       <div className="bg-dark py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-          {/* Fixtures */}
-          {activeTab === "fixtures" && (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {fixtures.map((f) => (
-                <div key={f.id} className="flex flex-col rounded-2xl bg-[#0d0d0d] p-6">
+          {loading ? (
+            <div className="py-20 text-center font-sans text-sm text-muted">Loading...</div>
+          ) : (
+            <>
+              {/* Fixtures */}
+              {activeTab === "fixtures" && (
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                  {fixtures.map((f) => (
+                    <div key={f.id} className="flex flex-col rounded-2xl bg-[#0d0d0d] p-6">
 
-                  {/* Date + venue */}
-                  <div className="mb-6">
-                    <p className="font-sans text-xs font-semibold uppercase tracking-widest text-primary">
-                      {formatDate(f.date)}
-                    </p>
-                    <p className="mt-1 font-sans text-xs text-muted">{f.venue}</p>
-                  </div>
+                      {/* Date + venue */}
+                      <div className="mb-6">
+                        <p className="font-sans text-xs font-semibold uppercase tracking-widest text-primary">
+                          {formatDate(f.date)}
+                        </p>
+                        <p className="mt-1 font-sans text-xs text-muted">{f.venue}</p>
+                      </div>
 
-                  {/* Teams */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex flex-col items-center gap-2 text-center">
-                      <TeamBadge shortName={getShortName(f.homeTeam)} />
-                      <p className="font-sans text-xs font-semibold text-white">{f.homeTeam}</p>
-                    </div>
-
-                    <span className="font-display text-2xl text-primary">VS</span>
-
-                    <div className="flex flex-col items-center gap-2 text-center">
-                      <TeamBadge shortName={getShortName(f.awayTeam)} />
-                      <p className="font-sans text-xs font-semibold text-white">{f.awayTeam}</p>
-                    </div>
-                  </div>
-
-                  {/* Kick-off time */}
-                  <div className="mt-6 flex justify-end">
-                    <span className="font-sans text-sm font-bold text-white">{f.time} WAT</span>
-                  </div>
-
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Results */}
-          {activeTab === "results" && (
-            <div className="flex flex-col gap-3">
-              {results.map((r) => (
-                <div
-                  key={r.id}
-                  className="flex items-center justify-between rounded-xl bg-[#0d0d0d] px-6 py-4"
-                >
-                  {/* Home */}
-                  <div className="flex w-[35%] items-center gap-3">
-                    <TeamBadge shortName={getShortName(r.homeTeam)} size="sm" />
-                    <span className="font-sans text-sm font-semibold text-white">{r.homeTeam}</span>
-                  </div>
-
-                  {/* Score */}
-                  <div className="flex items-center gap-3">
-                    <span className="font-display text-2xl text-white">{r.homeScore}</span>
-                    <span className="font-sans text-xs text-muted">—</span>
-                    <span className="font-display text-2xl text-white">{r.awayScore}</span>
-                  </div>
-
-                  {/* Away */}
-                  <div className="flex w-[35%] items-center justify-end gap-3">
-                    <span className="font-sans text-sm font-semibold text-white">{r.awayTeam}</span>
-                    <TeamBadge shortName={getShortName(r.awayTeam)} size="sm" />
-                  </div>
-
-                  {/* Date */}
-                  <span className="hidden font-sans text-xs text-muted md:block">{formatDate(r.date)}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Standings */}
-          {activeTab === "standings" && (
-            <div className="overflow-hidden rounded-2xl bg-[#0d0d0d]">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    {["#", "Team", "P", "W", "D", "L", "Pts"].map((h) => (
-                      <th
-                        key={h}
-                        className={`px-4 py-3 font-sans text-xs font-semibold uppercase tracking-widest text-muted ${
-                          h === "Team" ? "text-left" : "text-center"
-                        }`}
-                      >
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {standings.map((row) => (
-                    <tr
-                      key={row.position}
-                      className={`border-b border-white/5 transition-colors hover:bg-white/5 ${
-                        row.position <= 3 ? "border-l-2 border-l-primary" : "border-l-2 border-l-transparent"
-                      }`}
-                    >
-                      <td className="px-4 py-4 text-center font-sans text-sm text-muted">{row.position}</td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-3">
-                          <TeamBadge shortName={getShortName(row.team)} size="sm" />
-                          <span className="font-sans text-sm font-semibold text-white">{row.team}</span>
+                      {/* Teams */}
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex flex-col items-center gap-2 text-center">
+                          <TeamBadge shortName={getShortName(f.homeTeam)} />
+                          <p className="font-sans text-xs font-semibold text-white">{f.homeTeam}</p>
                         </div>
-                      </td>
-                      <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.played}</td>
-                      <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.won}</td>
-                      <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.drawn}</td>
-                      <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.lost}</td>
-                      <td className="px-4 py-4 text-center font-display text-sm font-bold text-primary">{row.points}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
 
-          {/* Teams */}
-          {activeTab === "teams" && (
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-6">
-              {teams.map((team) => (
-                <div
-                  key={team.id}
-                  className="group flex flex-col items-center gap-3 rounded-2xl bg-[#0d0d0d] p-6 text-center transition-transform duration-300 hover:scale-105"
-                >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 font-display text-base font-bold text-white transition-colors duration-300 group-hover:bg-primary/20 group-hover:text-primary">
-                    {team.shortName}
-                  </div>
-                  <p className="font-sans text-xs font-semibold text-white">{team.name}</p>
-                  <p className="font-sans text-[10px] text-muted">Est. {team.founded}</p>
+                        <span className="font-display text-2xl text-primary">VS</span>
+
+                        <div className="flex flex-col items-center gap-2 text-center">
+                          <TeamBadge shortName={getShortName(f.awayTeam)} />
+                          <p className="font-sans text-xs font-semibold text-white">{f.awayTeam}</p>
+                        </div>
+                      </div>
+
+                      {/* Kick-off time */}
+                      <div className="mt-6 flex justify-end">
+                        <span className="font-sans text-sm font-bold text-white">{f.time} WAT</span>
+                      </div>
+
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+
+              {/* Results */}
+              {activeTab === "results" && (
+                <div className="flex flex-col gap-3">
+                  {results.map((r) => (
+                    <div
+                      key={r.id}
+                      className="flex items-center justify-between rounded-xl bg-[#0d0d0d] px-6 py-4"
+                    >
+                      {/* Home */}
+                      <div className="flex w-[35%] items-center gap-3">
+                        <TeamBadge shortName={getShortName(r.homeTeam)} size="sm" />
+                        <span className="font-sans text-sm font-semibold text-white">{r.homeTeam}</span>
+                      </div>
+
+                      {/* Score */}
+                      <div className="flex items-center gap-3">
+                        <span className="font-display text-2xl text-white">{r.homeScore}</span>
+                        <span className="font-sans text-xs text-muted">—</span>
+                        <span className="font-display text-2xl text-white">{r.awayScore}</span>
+                      </div>
+
+                      {/* Away */}
+                      <div className="flex w-[35%] items-center justify-end gap-3">
+                        <span className="font-sans text-sm font-semibold text-white">{r.awayTeam}</span>
+                        <TeamBadge shortName={getShortName(r.awayTeam)} size="sm" />
+                      </div>
+
+                      {/* Date */}
+                      <span className="hidden font-sans text-xs text-muted md:block">{formatDate(r.date)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Standings */}
+              {activeTab === "standings" && (
+                <div className="overflow-hidden rounded-2xl bg-[#0d0d0d]">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        {["#", "Team", "P", "W", "D", "L", "Pts"].map((h) => (
+                          <th
+                            key={h}
+                            className={`px-4 py-3 font-sans text-xs font-semibold uppercase tracking-widest text-muted ${
+                              h === "Team" ? "text-left" : "text-center"
+                            }`}
+                          >
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {standings.map((row) => (
+                        <tr
+                          key={row.position}
+                          className={`border-b border-white/5 transition-colors hover:bg-white/5 ${
+                            row.position <= 3 ? "border-l-2 border-l-primary" : "border-l-2 border-l-transparent"
+                          }`}
+                        >
+                          <td className="px-4 py-4 text-center font-sans text-sm text-muted">{row.position}</td>
+                          <td className="px-4 py-4">
+                            <div className="flex items-center gap-3">
+                              <TeamBadge shortName={getShortName(row.team)} size="sm" />
+                              <span className="font-sans text-sm font-semibold text-white">{row.team}</span>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.played}</td>
+                          <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.won}</td>
+                          <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.drawn}</td>
+                          <td className="px-4 py-4 text-center font-sans text-sm text-white">{row.lost}</td>
+                          <td className="px-4 py-4 text-center font-display text-sm font-bold text-primary">{row.points}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Teams */}
+              {activeTab === "teams" && (
+                <div className="grid grid-cols-2 gap-6 md:grid-cols-6">
+                  {teams.map((team) => (
+                    <div
+                      key={team.id}
+                      className="group flex flex-col items-center gap-3 rounded-2xl bg-[#0d0d0d] p-6 text-center transition-transform duration-300 hover:scale-105"
+                    >
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 font-display text-base font-bold text-white transition-colors duration-300 group-hover:bg-primary/20 group-hover:text-primary">
+                        {team.shortName}
+                      </div>
+                      <p className="font-sans text-xs font-semibold text-white">{team.name}</p>
+                      <p className="font-sans text-[10px] text-muted">Est. {team.founded}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
         </div>

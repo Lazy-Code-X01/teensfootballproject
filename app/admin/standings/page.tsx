@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RefreshCw } from "lucide-react";
-import { standings as initialStandings, results, teams } from "@/lib/mockData";
+import { results, teams } from "@/lib/mockData";
 
 type Row = {
   position: number;
@@ -59,14 +59,23 @@ function recalculate(): Row[] {
 }
 
 export default function StandingsPage() {
-  const [standings, setStandings] = useState<Row[]>(initialStandings);
+  const [standings, setStandings] = useState<Row[]>([]);
+  const [loading, setLoading] = useState(true);
   const [recalculated, setRecalculated] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/standings')
+      .then(r => r.json())
+      .then(data => { setStandings(data); setLoading(false); });
+  }, []);
 
   const handleRecalculate = () => {
     setStandings(recalculate());
     setRecalculated(true);
     setTimeout(() => setRecalculated(false), 2000);
   };
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

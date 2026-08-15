@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
-import { fixtures as initialFixtures, teams } from "@/lib/mockData";
+import { teams } from "@/lib/mockData";
 
 type Fixture = {
   id: number;
@@ -133,12 +133,19 @@ function FixtureModal({
 }
 
 export default function FixturesPage() {
-  const [fixtures, setFixtures] = useState<Fixture[]>(initialFixtures);
+  const [fixtures, setFixtures] = useState<Fixture[]>([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [filter, setFilter] = useState<Filter>("all");
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetch('/api/fixtures')
+      .then(r => r.json())
+      .then(data => { setFixtures(data); setLoading(false); });
+  }, []);
 
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -150,15 +157,21 @@ export default function FixturesPage() {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => setFixtures((p) => p.filter((f) => f.id !== id));
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/fixtures/${id}`, { method: 'DELETE' });
+    setFixtures(prev => prev.filter(f => f.id !== id));
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (editingId !== null) {
-      setFixtures((p) => p.map((f) => f.id === editingId ? { ...f, ...form } : f));
+      const res = await fetch(`/api/fixtures/${editingId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const updated = await res.json();
+      setFixtures(prev => prev.map(f => f.id === editingId ? updated : f));
     } else {
-      const newId = Math.max(0, ...fixtures.map((f) => f.id)) + 1;
-      setFixtures((p) => [...p, { id: newId, ...form }]);
+      const res = await fetch('/api/fixtures', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      const created = await res.json();
+      setFixtures(prev => [...prev, created]);
     }
     setModalOpen(false);
     setForm(emptyForm);
@@ -184,6 +197,8 @@ export default function FixturesPage() {
     { key: "live",      label: "Live" },
     { key: "completed", label: "Completed" },
   ];
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

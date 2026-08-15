@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Building2, ExternalLink } from "lucide-react";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 type Tier = "Platinum" | "Gold" | "Silver" | "Bronze";
 
@@ -21,14 +22,6 @@ type FormState = {
   website: string;
   since: string;
 };
-
-const initialSponsors: Sponsor[] = [
-  { id: 1, name: "The Oguntoyinbo Foundation", tier: "Platinum", logo: "/oguntoyinbo-foundation.webp", website: "",                              since: "2024" },
-  { id: 2, name: "7Eleven Foundation",         tier: "Gold",     logo: "/7eleven-foundation.webp",     website: "",                              since: "2025" },
-  { id: 3, name: "Oyo State Ministry",         tier: "Silver",   logo: "",                             website: "",                              since: "2024" },
-  { id: 4, name: "T & A Legal",                tier: "Bronze",   logo: "",                             website: "",                              since: "2026" },
-  { id: 5, name: "Madux Vision",               tier: "Bronze",   logo: "/madux-badge.webp",            website: "",                              since: "2026" },
-];
 
 const TIERS: Tier[] = ["Platinum", "Gold", "Silver", "Bronze"];
 
@@ -90,10 +83,7 @@ function SponsorModal({
               <input type="number" className={inputClass} placeholder="2026" min={2020} max={2099} value={form.since} onChange={(e) => set("since", e.target.value)} required />
             </div>
           </div>
-          <div>
-            <label className={labelClass}>Logo URL (optional)</label>
-            <input className={inputClass} placeholder="/logo.webp or https://..." value={form.logo} onChange={(e) => set("logo", e.target.value)} />
-          </div>
+          <ImageUploadField label="Logo URL (optional)" value={form.logo} onChange={(url) => set("logo", url)} />
           <div>
             <label className={labelClass}>Website (optional)</label>
             <input className={inputClass} placeholder="https://..." value={form.website} onChange={(e) => set("website", e.target.value)} />
@@ -113,29 +103,46 @@ function SponsorModal({
 }
 
 export default function SponsorsPage() {
-  const [sponsors, setSponsors] = useState<Sponsor[]>(initialSponsors);
+  const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>({ name: "", tier: "Gold", logo: "", website: "", since: "" });
 
+  useEffect(() => {
+    fetch('/api/sponsors')
+      .then(r => r.json())
+      .then(data => { setSponsors(data); setLoading(false); });
+  }, []);
+
   const set = (k: keyof FormState, v: string) => setForm((p) => ({ ...p, [k]: v }));
   const openAdd = () => { setForm({ name: "", tier: "Gold", logo: "", website: "", since: "" }); setEditingId(null); setModalOpen(true); };
   const openEdit = (s: Sponsor) => { setForm({ name: s.name, tier: s.tier, logo: s.logo, website: s.website, since: s.since }); setEditingId(s.id); setModalOpen(true); };
-  const handleDelete = (id: number) => setSponsors((p) => p.filter((s) => s.id !== id));
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/sponsors/${id}`, { method: 'DELETE' });
+    setSponsors(prev => prev.filter(s => s.id !== id));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = { name: form.name, tier: form.tier, logo: form.logo, website: form.website, since: form.since };
     if (editingId !== null) {
-      setSponsors((p) => p.map((s) => s.id === editingId ? { ...s, ...parsed } : s));
+      const res = await fetch(`/api/sponsors/${editingId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+      const updated = await res.json();
+      setSponsors(prev => prev.map(s => s.id === editingId ? updated : s));
     } else {
-      const newId = Math.max(0, ...sponsors.map((s) => s.id)) + 1;
-      setSponsors((p) => [...p, { id: newId, ...parsed }]);
+      const res = await fetch('/api/sponsors', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsed) });
+      const created = await res.json();
+      setSponsors(prev => [...prev, created]);
     }
     setModalOpen(false);
     setEditingId(null);
   };
 
   const grouped = TIERS.map((tier) => ({ tier, items: sponsors.filter((s) => s.tier === tier) })).filter((g) => g.items.length > 0);
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">

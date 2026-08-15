@@ -43,28 +43,29 @@ export default function Hero() {
               <h1 className="animate-fade-up delay-100 font-display leading-[0.9] tracking-wide mb-4">
                 <span className="block text-white text-[clamp(4rem,10vw,8rem)]">TRAIN.</span>
                 <span className="block text-white text-[clamp(4rem,10vw,8rem)]">GROW.</span>
-                <span className="block text-primary text-[clamp(4rem,10vw,8rem)]">SUCCEED.</span>
+                <span className="block text-primary text-[clamp(4rem,10vw,8rem)]">CONQUER.</span>
               </h1>
 
               {/* Subtext */}
               <p className="animate-fade-up delay-200 max-w-md text-base md:text-lg font-sans text-white/65 mb-6 leading-relaxed">
-                Developing future football stars from grassroots to the global
-                stage. Join the movement.
+                Somewhere in Nigeria, a teenager is finding out what they&apos;re
+                made of on a football pitch. TFP was built for that teenager.
+                For you.
               </p>
 
               {/* CTAs */}
               <div className="animate-fade-up delay-300 flex flex-wrap items-center gap-4">
                 <Link
-                  href="#programs"
+                  href="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-sans font-semibold text-white transition-colors duration-200 hover:bg-primary-dark"
                 >
-                  View Programs
+                  Join the League
                 </Link>
                 <Link
-                  href="/league"
+                  href="#programs"
                   className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3 text-sm font-sans font-semibold text-white transition-all duration-300 hover:bg-white/20"
                 >
-                  View Fixtures
+                  See How It Works
                 </Link>
               </div>
             </div>

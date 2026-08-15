@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard, Calendar, Trophy, BarChart3,
@@ -77,9 +78,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Logo area */}
         <div className="px-5 pt-6 pb-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <span className="font-display text-sm text-white">TFP</span>
-            </div>
+            <Image src="/tfp-logo.png" alt="TFP" width={36} height={36} className="rounded-lg" />
             <div>
               <p className="font-sans text-sm font-semibold text-white">TFP Admin</p>
               <p className="font-sans text-[10px] text-gray-500">2026 Season</p>
@@ -153,9 +152,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Mobile top bar */}
         <header className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-4 py-3 md:hidden" style={{ background: "#0d0d0d", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
-              <span className="font-display text-xs text-white">TFP</span>
-            </div>
+            <Image src="/tfp-logo.png" alt="TFP" width={28} height={28} className="rounded-md" />
             <span className="font-sans text-sm font-semibold text-white">Admin</span>
           </div>
           <div className="flex items-center gap-3">

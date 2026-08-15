@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Save, Check, Globe, Mail, Phone, MapPin, AtSign, Hash, Share2, PlayCircle, Trophy, Users } from "lucide-react";
 
 type SiteSettings = {
@@ -42,6 +42,9 @@ function Section({ title, description, children }: { title: string; description:
 }
 
 export default function SettingsPage() {
+  const [loading, setLoading] = useState(true);
+  const [saved, setSaved] = useState(false);
+
   const [site, setSite] = useState<SiteSettings>({
     siteName:      "Teens Football Project",
     tagline:       "Building Nigeria's next generation of football talent",
@@ -65,12 +68,28 @@ export default function SettingsPage() {
     matchDuration:  "90",
   });
 
-  const [saved, setSaved] = useState(false);
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(r => r.json())
+      .then(data => {
+        if (data.site)   setSite(data.site);
+        if (data.social) setSocial(data.social);
+        if (data.league) setLeague(data.league);
+        setLoading(false);
+      });
+  }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    await fetch('/api/settings', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ site, social, league }),
+    });
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
+
+  if (loading) return <div className="flex items-center justify-center py-20"><p className="font-sans text-sm text-gray-500">Loading...</p></div>;
 
   return (
     <div className="flex flex-col gap-6">
