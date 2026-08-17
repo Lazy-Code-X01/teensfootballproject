@@ -49,7 +49,7 @@ export default function SettingsPage() {
     siteName:      "Teens Football Project",
     tagline:       "Building Nigeria's next generation of football talent",
     email:         "teensfootballproject@gmail.com",
-    phone:         "+234 800 000 0000",
+    phone:         "0706 505 0656",
     addressIbadan: "No 2 Akinboade Close, Agodi GRA, Ibadan",
     addressOyo:    "Opposite Alawe Palace, Isaale Alawe First Bank Road, Oyo",
   });

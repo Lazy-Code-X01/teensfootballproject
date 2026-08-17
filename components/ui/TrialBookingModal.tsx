@@ -27,7 +27,7 @@ function TrialForm({ onSubmit }: { onSubmit: () => void }) {
         </div>
         <div>
           <label className={labelClass}>Phone Number</label>
-          <input className={inputClass} placeholder="+234 800 000 0000" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
+          <input className={inputClass} placeholder="0706 505 0656" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
         </div>
         <div>
           <label className={labelClass}>Age</label>
@@ -68,7 +68,7 @@ function RegisterTeamForm({ onSubmit }: { onSubmit: () => void }) {
         </div>
         <div>
           <label className={labelClass}>Phone Number</label>
-          <input className={inputClass} placeholder="+234 800 000 0000" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
+          <input className={inputClass} placeholder="0706 505 0656" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
         </div>
         <div>
           <label className={labelClass}>Email Address</label>
@@ -165,7 +165,7 @@ function ShareStoryForm({ onSubmit }: { onSubmit: () => void }) {
         </div>
         <div>
           <label className={labelClass}>Contact Phone</label>
-          <input className={inputClass} placeholder="+234 800 000 0000" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
+          <input className={inputClass} placeholder="0706 505 0656" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
         </div>
         <button type="submit" className="mt-2 w-full rounded-full bg-primary py-3 font-sans text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
           Share My Story
@@ -195,7 +195,7 @@ function SecureSlotForm({ prefill, onSubmit }: { prefill: Record<string, string>
         </div>
         <div>
           <label className={labelClass}>Phone Number</label>
-          <input className={inputClass} placeholder="+234 800 000 0000" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
+          <input className={inputClass} placeholder="0706 505 0656" value={form.phone ?? ""} onChange={(e) => set("phone", e.target.value)} required />
         </div>
         <div>
           <label className={labelClass}>Email Address</label>

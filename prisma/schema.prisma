@@ -57,6 +57,15 @@ model Sponsor {
   since   String
 }
 
+model Highlight {
+  id        Int    @id @default(autoincrement())
+  title     String
+  thumbnail String @default("")
+  videoUrl  String @default("")
+  duration  String @default("")
+  date      String
+}
+
 model GalleryItem {
   id      Int    @id @default(autoincrement())
   image   String

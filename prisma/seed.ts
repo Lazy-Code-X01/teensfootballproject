@@ -80,6 +80,52 @@ async function main() {
     skipDuplicates: true,
   })
 
+  await prisma.highlight.createMany({
+    data: [
+      { title: 'Dannaz FC vs Madux Vision — Full Match Highlights', thumbnail: '/gallery-match-2.webp', videoUrl: '', duration: '5:22', date: '2026-06-14' },
+      { title: 'Best Goals of the 2026 Afijio Season',              thumbnail: '/gallery-match-1.webp', videoUrl: '', duration: '4:10', date: '2026-06-07' },
+      { title: 'Behind the Scenes — Coaching Day at Afijio',        thumbnail: '/coach-2.webp',         videoUrl: '', duration: '3:45', date: '2026-06-01' },
+      { title: 'Afijio 2026 Season Opening Weekend',                thumbnail: '/gallery-lineup.webp',  videoUrl: '', duration: '6:02', date: '2026-05-03' },
+    ],
+    skipDuplicates: true,
+  })
+
+  await prisma.galleryItem.createMany({
+    data: [
+      { image: '/gallery-lineup.webp',   caption: 'Teams line up before kick-off — Afijio League' },
+      { image: '/about-1.webp',          caption: 'Goalkeeper commands the box' },
+      { image: '/about-2.webp',          caption: 'Aerial battle — players contest for possession' },
+      { image: '/gallery-match-2.webp',  caption: 'Orange vs Black — league matchday action' },
+      { image: '/program-2.webp',        caption: 'Midfield duel at the Afijio ground' },
+      { image: '/gallery-match-1.webp',  caption: 'Coach briefs the squad at half-time' },
+      { image: '/impact-player.webp',    caption: 'A moment of prayer before kick-off' },
+      { image: '/story-2.webp',          caption: 'Players gather before the match' },
+      { image: '/cta-bg.webp',           caption: 'Young fans cheering from the stands' },
+      { image: '/about-3.webp',          caption: 'Coach gives instructions from the touchline' },
+      { image: '/program-1.webp',        caption: 'High-knees warm-up before training' },
+      { image: '/about-edu.webp',        caption: 'Academic session — life skills in the classroom' },
+      { image: '/academy.webp',          caption: 'Life skills workshop for players' },
+      { image: '/coach-1.webp',          caption: 'TFP coach ready for the session' },
+      { image: '/coach-2.webp',          caption: 'Coach engages players at training' },
+      { image: '/gallery-crowd-1.webp',  caption: 'Community day — hundreds turn out at the Afijio ground' },
+      { image: '/gallery-official.webp', caption: 'League official follows the action closely' },
+      { image: '/coach-4.webp',          caption: 'Head coach addresses the full squad' },
+    ],
+    skipDuplicates: true,
+  })
+
+  await prisma.newsItem.createMany({
+    data: [
+      { title: 'TFP Secures New Training Ground Partnership',  excerpt: 'Teens Football Project has partnered with local facilities to expand training capacity for the 2026 season.',          image: '/academy.webp',       date: '2026-06-15', category: 'Announcement' },
+      { title: 'Three Players Selected for State Trials',      excerpt: 'Following standout performances this season, three TFP players have been invited to state-level trials.',              image: '/program-3.webp',     date: '2026-06-12', category: 'Player News'  },
+      { title: 'Dannaz FC Wins Thrilling 3-1 Derby',          excerpt: 'A dominant second-half performance saw Dannaz FC secure a crucial win in this season\'s biggest match.',              image: '/program-2.webp',     date: '2026-06-14', category: 'Match Report' },
+      { title: 'Afijio 2026 Season Officially Kicks Off',     excerpt: 'The new Afijio season began with an exciting opening weekend featuring all six clubs in action across Oyo State.',   image: '/league-bg.webp',     date: '2026-05-03', category: 'Announcement' },
+      { title: 'TFP Partners with Local Schools Programme',   excerpt: 'TFP has signed an MOU with five secondary schools in Oyo State to identify and develop grassroots talent.',          image: '/about-edu.webp',     date: '2026-06-01', category: 'Club News'    },
+      { title: 'Madux Vision Hold Dannaz FC to a Draw',       excerpt: 'A tight midfield battle ended 1-1 as Madux Vision claimed a valuable point against league leaders Dannaz FC.',      image: '/about-2.webp',       date: '2026-05-24', category: 'Match Report' },
+    ],
+    skipDuplicates: true,
+  })
+
   await prisma.settings.upsert({
     where: { id: 1 },
     create: {
@@ -87,7 +133,7 @@ async function main() {
       siteName: 'Teens Football Project',
       tagline: 'PLAY. RISE. REPEAT.',
       email: 'info@tfp.ng',
-      phone: '+234 800 000 0000',
+      phone: '0706 505 0656',
       addressIbadan: 'Ibadan, Oyo State',
       addressOyo: 'Afijio, Oyo State',
       leagueName: 'Afijio Teens Football League',

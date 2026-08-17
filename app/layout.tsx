@@ -55,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${anton.variable} ${plusJakarta.variable} scroll-smooth`}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <ModalProvider>
           <PublicShell>
             {children}

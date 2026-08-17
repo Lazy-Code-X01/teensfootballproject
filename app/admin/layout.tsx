@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard, Calendar, Trophy, BarChart3,
   Newspaper, ImageIcon, Users, Building2,
-  Settings, LogOut, Bell, ChevronRight,
+  Settings, LogOut, Bell, ChevronRight, PlayCircle,
 } from "lucide-react";
 
 const navGroups = [
@@ -22,9 +22,10 @@ const navGroups = [
   {
     label: "Content",
     items: [
-      { label: "News",    href: "/admin/news",    icon: Newspaper },
-      { label: "Gallery", href: "/admin/gallery", icon: ImageIcon },
-      { label: "Teams",   href: "/admin/teams",   icon: Users },
+      { label: "News",       href: "/admin/news",       icon: Newspaper   },
+      { label: "Gallery",   href: "/admin/gallery",   icon: ImageIcon   },
+      { label: "Highlights",href: "/admin/highlights",icon: PlayCircle  },
+      { label: "Teams",     href: "/admin/teams",     icon: Users       },
     ],
   },
   {
@@ -51,6 +52,7 @@ const pageTitles: Record<string, string> = {
   "/admin/standings":  "Standings",
   "/admin/news":       "News",
   "/admin/gallery":    "Gallery",
+  "/admin/highlights": "Highlights",
   "/admin/teams":      "Teams",
   "/admin/sponsors":   "Sponsors",
   "/admin/settings":   "Settings",
@@ -78,7 +80,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Logo area */}
         <div className="px-5 pt-6 pb-5">
           <div className="flex items-center gap-3">
-            <Image src="/tfp-logo.png" alt="TFP" width={36} height={36} className="rounded-lg" />
+            <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-lg">
+              <Image src="/tfp-logo.png" alt="TFP" fill className="object-contain" style={{ transform: "scale(2.2)", transformOrigin: "center" }} />
+            </div>
             <div>
               <p className="font-sans text-sm font-semibold text-white">TFP Admin</p>
               <p className="font-sans text-[10px] text-gray-500">2026 Season</p>
@@ -109,10 +113,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                           : "text-gray-500 hover:bg-white/[0.04] hover:text-gray-200"
                       }`}
                     >
-                      {/* Active left accent */}
-                      {active && (
-                        <span className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-primary" />
-                      )}
                       <Icon
                         className={`h-[17px] w-[17px] shrink-0 transition-colors ${
                           active ? "text-primary" : "text-gray-600 group-hover:text-gray-300"
@@ -152,7 +152,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Mobile top bar */}
         <header className="fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-4 py-3 md:hidden" style={{ background: "#0d0d0d", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="flex items-center gap-2.5">
-            <Image src="/tfp-logo.png" alt="TFP" width={28} height={28} className="rounded-md" />
+            <div className="relative h-7 w-7 shrink-0 overflow-hidden rounded-md">
+              <Image src="/tfp-logo.png" alt="TFP" fill className="object-contain" style={{ transform: "scale(2.2)", transformOrigin: "center" }} />
+            </div>
             <span className="font-sans text-sm font-semibold text-white">Admin</span>
           </div>
           <div className="flex items-center gap-3">

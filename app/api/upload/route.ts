@@ -8,20 +8,25 @@ cloudinary.config({
 })
 
 export async function POST(req: Request) {
-  const formData = await req.formData()
-  const file = formData.get('file') as File | null
+  try {
+    const formData = await req.formData()
+    const file = formData.get('file') as File | null
 
-  if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 })
+    if (!file) return NextResponse.json({ error: 'No file provided' }, { status: 400 })
 
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
 
-  const result = await new Promise<{ secure_url: string }>((resolve, reject) => {
-    cloudinary.uploader.upload_stream(
-      { folder: 'tfp', resource_type: 'image' },
-      (err, res) => (err ? reject(err) : resolve(res as { secure_url: string }))
-    ).end(buffer)
-  })
+    const result = await new Promise<{ secure_url: string }>((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        { folder: 'tfp', resource_type: 'image' },
+        (err, res) => (err ? reject(err) : resolve(res as { secure_url: string }))
+      ).end(buffer)
+    })
 
-  return NextResponse.json({ url: result.secure_url })
+    return NextResponse.json({ url: result.secure_url })
+  } catch (err) {
+    console.error('Upload error:', err)
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 })
+  }
 }

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useModal } from "@/context/ModalContext";
 
-type Highlight  = { id: string; thumbnail: string; title: string; date: string; duration: string };
+type Highlight   = { id: string; thumbnail: string; videoUrl: string; title: string; date: string; duration: string };
 type GalleryItem = { id: string; image: string; caption: string };
 type NewsItem    = { id: string; title: string; excerpt: string; category: string; image: string; date: string };
 
@@ -15,15 +15,15 @@ function formatDate(dateStr: string) {
 export default function MediaPage() {
   const { openModal } = useModal();
 
-  // highlights has no API endpoint yet — kept as an empty array
-  const highlights: Highlight[] = [];
-
-  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
-  const [newsItems, setNewsItems]       = useState<NewsItem[]>([]);
+  const [highlights, setHighlights]         = useState<Highlight[]>([]);
+  const [galleryItems, setGalleryItems]     = useState<GalleryItem[]>([]);
+  const [newsItems, setNewsItems]           = useState<NewsItem[]>([]);
   const [galleryLoading, setGalleryLoading] = useState(true);
   const [newsLoading, setNewsLoading]       = useState(true);
 
   useEffect(() => {
+    fetch("/api/highlights").then((r) => r.json()).then(setHighlights);
+
     fetch("/api/gallery")
       .then((r) => r.json())
       .then((data) => setGalleryItems(data))
@@ -65,8 +65,11 @@ export default function MediaPage() {
           <p className="mt-2 mb-12 font-sans text-sm text-muted">Catch up on the best moments from the pitch</p>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+            {highlights.length === 0 && (
+              <p className="col-span-4 py-10 text-center font-sans text-sm text-muted">No highlights yet — check back soon.</p>
+            )}
             {highlights.map((h) => (
-              <div key={h.id} className="group relative cursor-pointer overflow-hidden rounded-2xl">
+              <a key={h.id} href={h.videoUrl || "#"} target="_blank" rel="noopener noreferrer" className="group relative cursor-pointer overflow-hidden rounded-2xl" suppressHydrationWarning>
 
                 {/* Thumbnail */}
                 <div className="relative h-[200px] w-full">
@@ -96,7 +99,7 @@ export default function MediaPage() {
                   <p className="mt-1 font-sans text-[10px] text-muted">{formatDate(h.date)}</p>
                 </div>
 
-              </div>
+              </a>
             ))}
           </div>
         </div>
