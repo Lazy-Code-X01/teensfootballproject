@@ -277,7 +277,7 @@ export default function ContactPage() {
               </button>
 
               {status === "success" && (
-                <p className="mt-3 font-sans text-sm text-primary">Message sent! We'll be in touch soon.</p>
+                <p className="mt-3 font-sans text-sm text-primary">Message sent! We&apos;ll be in touch soon.</p>
               )}
               {status === "error" && (
                 <p className="mt-3 font-sans text-sm text-red-400">Something went wrong. Please try again.</p>
