@@ -6,7 +6,7 @@ const values = [
   {
     icon: <Trophy className="h-8 w-8 text-primary" />,
     title: "Excellence",
-    body: "We don't celebrate showing up. We celebrate showing up and giving everything — because we know what these teenagers are capable of.",
+    body: "We don't celebrate showing up. We celebrate showing up and giving everything because we know what these teenagers are capable of.",
   },
   {
     icon: <Handshake className="h-8 w-8 text-primary" />,
@@ -105,14 +105,14 @@ export default function AboutPage() {
               </h2>
               <p className="mt-6 font-sans text-sm leading-relaxed text-muted">
                 What happens to a teenager in Nigeria who loves football but has no structure around
-                them? They play on roads. They train on rubble. They watch their talent go nowhere —
+                them? They play on roads. They train on rubble. They watch their talent go nowhere,
                 not because they aren&apos;t good enough, but because nobody built a proper platform
                 for them.
               </p>
               <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
                 The Afijio Teens Football League launched as TFP&apos;s very first community project.
                 Six teams. One pitch. And results that nobody expected. What happened in Afijio was
-                not a coincidence — it was a model. And models are meant to be replicated.
+                not a coincidence, it was a model. And models are meant to be replicated.
               </p>
               <Link
                 href="/contact"
@@ -309,7 +309,7 @@ export default function AboutPage() {
                   A community development and football administration professional, Wasiu provides operational leadership across TFP and the Afijio Teens Football League. He coordinates league activities, drives strategic partnerships and sponsorship engagement, and champions player welfare, safeguarding, and stakeholder coordination.
                 </p>
                 <p className="mt-3 font-sans text-sm leading-relaxed text-muted">
-                  Passionate about football as a vehicle for youth development, Wasiu works to ensure the ATFL operates with professionalism, accountability, and transparency — continuously strengthening TFP&apos;s grassroots football structure and creating meaningful opportunities for young players across Oyo State.
+                  Passionate about football as a vehicle for youth development, Wasiu works to ensure the ATFL operates with professionalism, accountability, and transparency continuously strengthening TFP&apos;s grassroots football structure and creating meaningful opportunities for young players across Oyo State.
                 </p>
               </div>
             </div>
