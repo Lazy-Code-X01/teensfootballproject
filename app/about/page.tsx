@@ -295,7 +295,7 @@ export default function AboutPage() {
             {/* COO */}
             <div className="overflow-hidden rounded-2xl border border-gray-100 bg-[#fafafa]">
               <div className="relative h-[460px] w-full overflow-hidden">
-                <Image src="/coo.jpeg" alt="Wasiu Jimoh Ola" fill className="object-cover object-[center_10%]" />
+                <Image src="/coo-v2.jpeg" alt="Wasiu Jimoh Ola" fill className="object-cover object-[center_10%]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6">
                   <span className="rounded-full bg-primary px-3 py-1 font-sans text-xs font-semibold text-white">
