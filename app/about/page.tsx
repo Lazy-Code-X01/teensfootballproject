@@ -277,7 +277,7 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6">
                   <span className="rounded-full bg-primary px-3 py-1 font-sans text-xs font-semibold text-white">
-                    Chief Executive Officer
+                    Chairman
                   </span>
                 </div>
               </div>
