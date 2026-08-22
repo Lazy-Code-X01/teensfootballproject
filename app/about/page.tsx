@@ -252,7 +252,73 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 7: Match Day CTA */}
+      {/* Section 7: Leadership */}
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+          <div className="text-center">
+            <span className="inline-block rounded-full border border-[#888888] px-4 py-1 font-sans text-sm text-dark">
+              The People Behind TFP
+            </span>
+            <h2 className="mt-4 font-display text-4xl leading-none text-dark md:text-6xl">
+              MEET THE LEADERSHIP
+            </h2>
+            <p className="mt-4 font-sans text-sm text-muted">
+              Visionary leaders driving youth development across Nigeria
+            </p>
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+
+            {/* CEO */}
+            <div className="overflow-hidden rounded-2xl border border-gray-100 bg-[#fafafa]">
+              <div className="relative h-[380px] w-full overflow-hidden">
+                <Image src="/ceo.jpeg" alt="Seyi Adisa" fill className="object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6">
+                  <span className="rounded-full bg-primary px-3 py-1 font-sans text-xs font-semibold text-white">
+                    Chief Executive Officer
+                  </span>
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="font-display text-2xl text-dark">SEYI ADISA</h3>
+                <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
+                  A lawyer, public administrator, and John Maxwell Leadership coach, Seyi holds degrees from the University of Birmingham and Harvard&apos;s Continuing Education Program, and is a Fellow of ICSAN. He served as Honourable Member for Afijio State Constituency in the Oyo State House of Assembly (2019–2023) and as Principal Private Secretary to the Governor of Oyo State.
+                </p>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-muted">
+                  In 2023, he founded the African Governance Institute for Development (AGID). A UN-affiliate MIPAD Top 100 Most Influential People of African Descent honouree and Archbishop Desmond Tutu Fellow, Seyi leads TFP with a vision rooted in youth empowerment, governance, and community development.
+                </p>
+              </div>
+            </div>
+
+            {/* COO */}
+            <div className="overflow-hidden rounded-2xl border border-gray-100 bg-[#fafafa]">
+              <div className="relative h-[380px] w-full overflow-hidden">
+                <Image src="/coo.jpeg" alt="Wasiu Jimoh Ola" fill className="object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6">
+                  <span className="rounded-full bg-primary px-3 py-1 font-sans text-xs font-semibold text-white">
+                    Chief Operating Officer
+                  </span>
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="font-display text-2xl text-dark">WASIU JIMOH OLA</h3>
+                <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
+                  A community development and football administration professional, Wasiu provides operational leadership across TFP and the Afijio Teens Football League. He coordinates league activities, drives strategic partnerships and sponsorship engagement, and champions player welfare, safeguarding, and stakeholder coordination.
+                </p>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-muted">
+                  Passionate about football as a vehicle for youth development, Wasiu works to ensure the ATFL operates with professionalism, accountability, and transparency — continuously strengthening TFP&apos;s grassroots football structure and creating meaningful opportunities for young players across Oyo State.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Section 8: Match Day CTA */}
       <section
         className="relative flex min-h-[400px] items-center justify-center"
         style={{
