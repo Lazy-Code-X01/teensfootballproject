@@ -24,11 +24,11 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, rgba(1,1,1,0.92) 0%, rgba(1,1,1,0.75) 40%, rgba(1,1,1,0.2) 70%, rgba(1,1,1,0.05) 100%)",
+              "linear-gradient(to right, rgba(1,1,1,0.78) 0%, rgba(1,1,1,0.55) 35%, rgba(1,1,1,0.25) 60%, rgba(1,1,1,0.08) 80%, rgba(1,1,1,0.0) 100%)",
           }}
         />
         {/* Bottom fade into page bg */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-dark/70 to-transparent" />
       </div>
 
       {/* Main content */}
