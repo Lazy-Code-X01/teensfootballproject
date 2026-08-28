@@ -14,7 +14,7 @@ export default function Hero() {
       style={{
         backgroundImage: "url('/new-hero.jpeg')",
         backgroundSize: "cover",
-        backgroundPosition: "center right",
+        backgroundPosition: "center center",
       }}
     >
       {/* Overlays */}
