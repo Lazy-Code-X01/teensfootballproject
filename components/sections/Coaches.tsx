@@ -6,14 +6,14 @@ import Image from "next/image";
 const coaches = [
   {
     image: "/coach-1.webp",
-    name: "Coach Emeka Obi",
-    role: "Head Coach",
-    bio: "Former Super Eagles youth team coach with 15+ years developing grassroots talent across Nigeria.",
+    name: "Ibrahim Olanrewaju Akeem",
+    role: "Head Coach — Dannaz FC",
+    bio: "Experienced grassroots football coach driving development and discipline at Dannaz FC within the Afijio league.",
   },
   {
     image: "/coach-2.webp",
     name: "Coach Tunde Adeyemi",
-    role: "Assistant Coach",
+    role: "Head Coach — Oguntoyinbo FC",
     bio: "Former national league player with over 12 years of coaching experience developing youth and elite teams.",
   },
   {
@@ -24,9 +24,9 @@ const coaches = [
   },
   {
     image: "/coach-4.webp",
-    name: "Coach Kola Martins",
-    role: "Fitness Trainer",
-    bio: "Certified fitness trainer focused on speed, agility and injury prevention for teenage athletes.",
+    name: "Coach Saheed Oyeladun",
+    role: "Head Coach — T&A Legal FC",
+    bio: "Dedicated coach leading T&A Legal FC with a focus on tactical development and building team cohesion.",
   },
 ];
 
