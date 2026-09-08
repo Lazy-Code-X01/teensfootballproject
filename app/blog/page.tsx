@@ -76,10 +76,7 @@ export default function BlogPage() {
       >
         <div className="absolute inset-0 bg-black/75" />
         <div className="relative z-10 px-6 text-center">
-          <span className="inline-block rounded-full border border-white/30 px-4 py-1 font-sans text-xs font-semibold uppercase tracking-widest text-white/70">
-            TFP Blog
-          </span>
-          <h1 className="mt-4 font-display text-5xl leading-none text-white md:text-8xl">
+          <h1 className="font-display text-5xl leading-none text-white md:text-8xl">
             ARTICLES &amp; UPDATES
           </h1>
           <p className="mt-4 max-w-xl mx-auto font-sans text-sm leading-relaxed text-white/60">
