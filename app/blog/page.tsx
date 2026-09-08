@@ -88,7 +88,7 @@ export default function BlogPage() {
       {/* Category Filter */}
       <section className="bg-white border-b border-gray-100 sticky top-16 z-30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-hide">
+          <div className="flex items-center justify-center gap-2 overflow-x-auto py-3 scrollbar-hide">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
