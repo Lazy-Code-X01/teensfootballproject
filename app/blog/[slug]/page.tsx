@@ -87,7 +87,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             </span>
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />
-              {formatDate(article.date || article.createdAt)}
+              {formatDate(article.date || article.createdAt.toISOString())}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5" />
