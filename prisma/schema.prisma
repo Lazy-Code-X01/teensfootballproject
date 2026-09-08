@@ -108,3 +108,18 @@ model ContactSubmission {
   message   String
   createdAt DateTime @default(now())
 }
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  excerpt   String   @default("")
+  body      String   @default("")
+  category  String   @default("General")
+  image     String   @default("")
+  author    String   @default("TFP Team")
+  published Boolean  @default(false)
+  date      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

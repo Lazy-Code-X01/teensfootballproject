@@ -12,6 +12,7 @@ const navLinks = [
   { label: "League", href: "/league", activeFor: [] as string[] },
   { label: "Media", href: "/media", activeFor: [] as string[] },
   { label: "Sponsors", href: "/sponsors", activeFor: [] as string[] },
+  { label: "Blog", href: "/blog", activeFor: [] as string[] },
   { label: "Impact", href: "/impact", activeFor: ["/stories"] },
   { label: "Contact", href: "/contact", activeFor: [] as string[] },
 ];

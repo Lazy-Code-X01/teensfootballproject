@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard, Calendar, Trophy, BarChart3,
   Newspaper, ImageIcon, Users, Building2,
-  Settings, LogOut, Bell, ChevronRight, PlayCircle,
+  Settings, LogOut, Bell, ChevronRight, PlayCircle, BookOpen,
 } from "lucide-react";
 
 const navGroups = [
@@ -22,6 +22,7 @@ const navGroups = [
   {
     label: "Content",
     items: [
+      { label: "Articles",   href: "/admin/articles",  icon: BookOpen    },
       { label: "News",       href: "/admin/news",       icon: Newspaper   },
       { label: "Gallery",   href: "/admin/gallery",   icon: ImageIcon   },
       { label: "Highlights",href: "/admin/highlights",icon: PlayCircle  },
@@ -40,7 +41,7 @@ const navGroups = [
 const mobileNav = [
   { label: "Home",     href: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Fixtures", href: "/admin/fixtures",  icon: Calendar },
-  { label: "News",     href: "/admin/news",      icon: Newspaper },
+  { label: "Articles", href: "/admin/articles",  icon: BookOpen },
   { label: "Gallery",  href: "/admin/gallery",   icon: ImageIcon },
   { label: "Settings", href: "/admin/settings",  icon: Settings },
 ];
@@ -50,6 +51,7 @@ const pageTitles: Record<string, string> = {
   "/admin/fixtures":   "Fixtures",
   "/admin/results":    "Results",
   "/admin/standings":  "Standings",
+  "/admin/articles":   "Articles",
   "/admin/news":       "News",
   "/admin/gallery":    "Gallery",
   "/admin/highlights": "Highlights",
