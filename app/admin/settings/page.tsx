@@ -55,8 +55,8 @@ export default function SettingsPage() {
   });
 
   const [social, setSocial] = useState<SocialSettings>({
-    instagram: "https://instagram.com/tfp",
-    twitter:   "https://twitter.com/tfp",
+    instagram: "https://www.instagram.com/afijiotfl",
+    twitter:   "https://x.com/afijioTFL",
     facebook:  "",
     youtube:   "",
   });

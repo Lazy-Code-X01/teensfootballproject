@@ -18,8 +18,8 @@ const facilityLinks = [
 
 const moreLinks = [
   { label: "Join Now",   href: "/contact" },
-  { label: "Facebook",   href: "#" },
-  { label: "Instagram",  href: "#" },
+  { label: "Instagram",  href: "https://www.instagram.com/afijiotfl" },
+  { label: "Twitter / X", href: "https://x.com/afijioTFL" },
   { label: "Help Center", href: "#" },
 ];
 
