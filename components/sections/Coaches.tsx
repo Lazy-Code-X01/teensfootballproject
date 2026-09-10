@@ -5,26 +5,32 @@ import Image from "next/image";
 
 const coaches = [
   {
-    image: "/coach-1.webp",
+    image: "/coach-ibrahim.jpg",
     name: "Ibrahim Olanrewaju Akeem",
     role: "Head Coach — Dannaz FC",
     bio: "Experienced grassroots football coach driving development and discipline at Dannaz FC within the Afijio league.",
   },
   {
-    image: "/coach-2.webp",
-    name: "Coach Tunde Adeyemi",
+    image: "/coach-gbenga.jpg",
+    name: "Adeleke Gbenga Olalekan",
     role: "Head Coach — Oguntoyinbo FC",
-    bio: "Former national league player with over 12 years of coaching experience developing youth and elite teams.",
+    bio: "Dedicated coach building a strong foundation at Oguntoyinbo FC, focused on player development and team discipline.",
   },
   {
-    image: "/coach-3.webp",
-    name: "Coach Seun Bello",
-    role: "Goalkeeping Coach",
-    bio: "Specialist goalkeeper trainer with 8 years experience, trained 3 players now in professional clubs.",
+    image: "/coach-abass.jpg",
+    name: "Adeleke Abass Oluwatobi",
+    role: "Head Coach — Moballers United",
+    bio: "Passionate coach leading Moballers United with energy and commitment to nurturing grassroots football talent.",
   },
   {
-    image: "/coach-4.webp",
-    name: "Coach Saheed Oyeladun",
+    image: "/coach-okiki.jpg",
+    name: "Okiki Peter Matthew",
+    role: "Head Coach — Madux Vision FC",
+    bio: "Tactical and driven, Okiki brings structure and vision to Madux Vision FC, developing players on and off the pitch.",
+  },
+  {
+    image: "/coach-saheed.jpg",
+    name: "Saheed Oyeladun",
     role: "Head Coach — T&A Legal FC",
     bio: "Dedicated coach leading T&A Legal FC with a focus on tactical development and building team cohesion.",
   },
@@ -72,8 +78,8 @@ export default function Coaches() {
           </p>
         </div>
 
-        {/* Right column: 2×2 flip cards */}
-        <div className={`grid grid-cols-2 gap-4 ${fade} delay-200 ${visible ? in_ : out}`}>
+        {/* Right column: flip cards — 2 cols, wraps into 3 rows for 5 coaches */}
+        <div className={`grid grid-cols-2 gap-4 sm:grid-cols-3 ${fade} delay-200 ${visible ? in_ : out}`}>
           {coaches.map((coach) => (
             <div key={coach.name} className="group relative h-[280px] cursor-pointer overflow-hidden rounded-2xl">
 
