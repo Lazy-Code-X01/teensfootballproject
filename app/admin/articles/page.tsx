@@ -96,10 +96,11 @@ function ArticleModal({
 
   return (
     <div className="fixed inset-0 z-50">
-      {/* Backdrop stays fixed — never scrolls */}
+      {/* Backdrop — always fixed, never scrolls */}
       <div className="fixed inset-0 bg-black/75 backdrop-blur-sm" onClick={onClose} />
-      {/* Scroll wrapper sits on top */}
-      <div className="relative flex min-h-full items-start justify-center overflow-y-auto p-4 py-8">
+      {/* Scroll container — fixed+overflow so only modal scrolls */}
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex min-h-full items-start justify-center p-4 py-8">
       <div className="relative w-full max-w-2xl rounded-2xl p-6 shadow-2xl" style={{ background: "#111", border: "1px solid rgba(255,255,255,0.08)" }}>
 
         {/* Header */}
@@ -242,6 +243,7 @@ function ArticleModal({
           </div>
         </form>
       </div>
+        </div>
       </div>
     </div>
   );
