@@ -1,11 +1,5 @@
 import Link from "next/link";
 
-const stats = [
-  { value: "500+", label: "Players" },
-  { value: "20+",  label: "Teams" },
-  { value: "3",    label: "Seasons" },
-  { value: "100+", label: "Matches Played" },
-];
 
 export default function Hero() {
   return (
@@ -104,26 +98,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Stats bar */}
-      <div className="relative z-10 border-t border-white/10 bg-black/60 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex divide-x divide-white/10 overflow-x-auto scrollbar-hide">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex min-w-[110px] flex-1 flex-col items-center justify-center px-4 py-3 text-center"
-              >
-                <p className="text-base font-bold leading-none text-white">
-                  {stat.value}
-                </p>
-                <p className="mt-0.5 whitespace-nowrap text-[11px] text-muted">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

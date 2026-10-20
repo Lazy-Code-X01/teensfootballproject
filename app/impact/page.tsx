@@ -6,7 +6,7 @@ import { Check, Target, Heart, GraduationCap, Users, Handshake } from "lucide-re
 import { useModal } from "@/context/ModalContext";
 
 const stats = [
-  { value: "500+", label: "Players Developed" },
+  { value: "105", label: "Players Developed" },
   { value: "20+",  label: "Active Teams" },
   { value: "3",    label: "Seasons Completed" },
   { value: "10+",  label: "Communities Reached" },
@@ -31,8 +31,8 @@ const timelineItems = [
     year: "2025",
     side: "left",
     title: "BUILDING A MOVEMENT",
-    body: "Season 3 established TFP as a serious youth development platform. 500+ players, 20+ teams, and a clear pathway from grassroots to global exposure.",
-    stat: "500+ Players · 20+ Teams · 3 Seasons",
+    body: "Season 3 established TFP as a serious youth development platform. 105 players, 20+ teams, and a clear pathway from grassroots to global exposure.",
+    stat: "105 Players · 20+ Teams · 3 Seasons",
   },
 ];
 

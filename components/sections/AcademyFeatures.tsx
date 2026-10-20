@@ -21,9 +21,9 @@ const features = [
       "Our players have gone on to represent state teams, national youth squads, and earn professional trials abroad.",
   },
   {
-    title: "Community & Growth",
+    title: "Leadership & Character",
     description:
-      "TFP is more than football. We build character, discipline, and a sense of belonging that extends beyond the pitch.",
+      "TFP is more than football. We build leaders — instilling discipline, accountability, and character that extends far beyond the pitch.",
   },
 ];
 
@@ -42,8 +42,8 @@ export default function AcademyFeatures() {
             STEP INSIDE OUR ACADEMY
           </h2>
           <p className="font-sans text-sm leading-relaxed text-muted">
-            Experience our cutting-edge facilities designed to nurture talent,
-            improve performance and help every player reach their potential.
+            Our academy is built on leadership and character training — giving
+            every player the tools to succeed on and off the pitch.
           </p>
           <Image
             src="/academy.webp"

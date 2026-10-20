@@ -112,7 +112,7 @@ export default function LeaguePage() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {[["6", "Competing Teams"], ["3", "Seasons Run"], ["100+", "Matches Played"], ["500+", "Players Developed"]].map(([v, l]) => (
+              {[["6", "Competing Teams"], ["3", "Seasons Run"], ["100+", "Matches Played"], ["105", "Players Developed"]].map(([v, l]) => (
                 <div key={l} className="rounded-2xl bg-dark p-6">
                   <p className="font-display text-4xl text-primary">{v}</p>
                   <p className="mt-1 font-sans text-xs text-muted">{l}</p>

@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/Hero";
+import StatsSection from "@/components/sections/StatsSection";
 import AboutSnippet from "@/components/sections/AboutSnippet";
 import Programs from "@/components/sections/Programs";
 import Coaches from "@/components/sections/Coaches";
@@ -11,6 +12,7 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
+      <StatsSection />
       <AboutSnippet />
       <Programs />
       <Coaches />

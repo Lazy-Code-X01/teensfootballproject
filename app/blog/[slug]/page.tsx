@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Calendar, Clock, ArrowLeft, Tag } from "lucide-react";
+import { Calendar, Clock, ChevronLeft, Tag } from "lucide-react";
 import { db } from "@/lib/db";
 
 const categoryStyle: Record<string, string> = {
@@ -67,16 +67,12 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         <div className="relative z-10 mx-auto w-full max-w-4xl px-4 pb-12 sm:px-6 lg:px-8">
           <Link
             href="/blog"
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 font-sans text-xs text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            className="mb-6 inline-flex items-center gap-1 font-sans text-sm text-white/70 transition-colors hover:text-white"
           >
-            <ArrowLeft className="h-3 w-3" /> Back to Blog
+            <ChevronLeft className="h-4 w-4" /> Back to Blog
           </Link>
 
-          <span className={`w-fit rounded-full border px-3 py-1 font-sans text-xs font-semibold ${categoryStyle[article.category] ?? categoryStyle["General"]}`}>
-            {article.category}
-          </span>
-
-          <h1 className="mt-4 font-display text-4xl leading-tight text-white md:text-6xl lg:text-7xl">
+          <h1 className="font-display text-4xl leading-tight text-white md:text-6xl lg:text-7xl">
             {article.title.toUpperCase()}
           </h1>
 

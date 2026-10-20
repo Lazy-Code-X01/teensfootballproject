@@ -49,7 +49,7 @@ const steps = [
 ];
 
 const stats = [
-  { value: "500+", label: "Players Developed" },
+  { value: "105", label: "Players Developed" },
   { value: "20+",  label: "Active Teams" },
   { value: "3",    label: "Seasons Completed" },
   { value: "100+", label: "Matches Played" },
@@ -268,7 +268,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 
             {/* CEO */}
             <div className="overflow-hidden rounded-2xl border border-gray-100 bg-[#fafafa]">
@@ -310,6 +310,28 @@ export default function AboutPage() {
                 </p>
                 <p className="mt-3 font-sans text-sm leading-relaxed text-muted">
                   Passionate about football as a vehicle for youth development, Wasiu works to ensure the ATFL operates with professionalism, accountability, and transparency continuously strengthening TFP&apos;s grassroots football structure and creating meaningful opportunities for young players across Oyo State.
+                </p>
+              </div>
+            </div>
+
+            {/* Communications Manager */}
+            <div className="overflow-hidden rounded-2xl border border-gray-100 bg-[#fafafa]">
+              <div className="relative h-[460px] w-full overflow-hidden">
+                <Image src="/atilola.jpg" alt="Atilola Olarinde" fill className="object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 p-6">
+                  <span className="rounded-full bg-primary px-3 py-1 font-sans text-xs font-semibold text-white">
+                    Social Media & Communications Manager
+                  </span>
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="font-display text-2xl text-dark">ATILOLA OLARINDE</h3>
+                <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
+                  Atilola Olarinde leads TFP&apos;s social media and communications, shaping how the organisation tells its story online. A skilled content strategist and creative director, she blends compelling storytelling with data-driven insights to build engaged communities and amplify TFP&apos;s mission across digital platforms.
+                </p>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-muted">
+                  With expertise in content creation, community management, and brand strategy, Atilola brings professionalism and creativity to everything TFP puts out — ensuring the movement&apos;s voice is consistent, impactful, and reaches every corner of Nigeria.
                 </p>
               </div>
             </div>

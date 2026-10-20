@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
+import { Calendar, Clock, BookOpen } from "lucide-react";
 
 type Article = {
   id: number;
@@ -145,10 +145,7 @@ export default function BlogPage() {
 
                   {/* Content */}
                   <div className="flex flex-col justify-center bg-white p-8 md:p-12">
-                    <span className={`w-fit rounded-full border px-3 py-1 font-sans text-xs font-semibold ${categoryStyle[featured.category] ?? categoryStyle["General"]}`}>
-                      {featured.category}
-                    </span>
-                    <h2 className="mt-4 font-display text-3xl leading-tight text-dark md:text-4xl lg:text-5xl">
+                    <h2 className="font-display text-3xl leading-tight text-dark md:text-4xl lg:text-5xl">
                       {featured.title.toUpperCase()}
                     </h2>
                     <p className="mt-4 font-sans text-sm leading-relaxed text-muted line-clamp-3">
@@ -168,8 +165,10 @@ export default function BlogPage() {
                         {readTime(featured.body)} min read
                       </span>
                     </div>
-                    <div className="mt-8 flex items-center gap-2 font-sans text-sm font-semibold text-primary transition-all duration-200 group-hover:gap-3">
-                      Read Article <ArrowRight className="h-4 w-4" />
+                    <div className="mt-8">
+                      <span className="inline-block rounded-full bg-primary px-5 py-2.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-primary-dark">
+                        Read Article
+                      </span>
                     </div>
                   </div>
                 </Link>

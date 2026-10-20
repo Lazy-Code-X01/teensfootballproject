@@ -131,11 +131,11 @@ export default function SponsorsPage() {
                 Across Oyo State, there are hundreds of teenagers with the skill, drive, and hunger to make it in football. Most will never get the chance — not because they aren&apos;t good enough, but because no one invested in the infrastructure around them.
               </p>
               <p className="mt-4 font-sans text-sm leading-relaxed text-muted">
-                TFP exists to close that gap. Since our first season, we&apos;ve developed 500+ players, run 100+ matches, and helped young talents earn trials with professional clubs. Every one of those outcomes had a cost. Sponsors like you made them possible.
+                TFP exists to close that gap. Since our first season, we&apos;ve developed 105 players, run 100+ matches, and helped young talents earn trials with professional clubs. Every one of those outcomes had a cost. Sponsors like you made them possible.
               </p>
 
               <div className="mt-8 grid grid-cols-3 gap-4 border-t border-gray-100 pt-8">
-                {[["500+", "Players"], ["100+", "Matches"], ["3", "Seasons"]].map(([v, l]) => (
+                {[["105", "Players"], ["100+", "Matches"], ["3", "Seasons"]].map(([v, l]) => (
                   <div key={l}>
                     <p className="font-display text-3xl text-primary">{v}</p>
                     <p className="mt-1 font-sans text-xs text-muted">{l}</p>
