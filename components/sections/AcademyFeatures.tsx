@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -72,13 +73,11 @@ export default function AcademyFeatures() {
                     >
                       {feature.title}
                     </span>
-                    <span
-                      className={`ml-4 shrink-0 text-lg transition-transform duration-300 ${
+                    <ChevronRight
+                      className={`ml-4 h-4 w-4 shrink-0 transition-transform duration-300 ${
                         isOpen ? "rotate-90 text-primary" : "text-dark"
                       }`}
-                    >
-                      ↗
-                    </span>
+                    />
                   </button>
 
                   {/* Expandable description */}
